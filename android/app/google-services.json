@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1021909815248",
+    "project_id": "kurankerimapp",
+    "storage_bucket": "kurankerimapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021909815248:android:f7461a57280faf9e6273d5",
+        "android_client_info": {
+          "package_name": "io.windssson.kuranapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021909815248-ej4o2f9e493qkloidbq90hm10rtmo9qh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.windssson.kuranapp",
+            "certificate_hash": "e187ec75be1502a1dff1f1fb0d440d1f7de2b11d"
+          }
+        },
+        {
+          "client_id": "1021909815248-ia7mafe9jqfoovsnkid8vdhj9m2deoum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2ZyYB8Kjz2ww6CLGkbb2w07eCf2C-sMU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021909815248-ia7mafe9jqfoovsnkid8vdhj9m2deoum.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1021909815248-fpjk06flf31akp4rvhumm3jpnk3b68uv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sahibulnf.quranApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
