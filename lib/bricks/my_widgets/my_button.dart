@@ -62,7 +62,7 @@ class MyButton extends StatelessWidget {
                   if (text != "Delete") const SizedBox(width: 5),
                   if (text != "Delete")
                     Text(
-                      "Loading...",
+                      "Yükleniyor...",
                       style: AppTextStyle.normal.copyWith(
                         color: Theme.of(context).cardColor,
                       ),

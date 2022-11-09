@@ -127,13 +127,10 @@ class UserControllerImpl extends UserController {
 
     final userResult = await userRepo.fetchUser(email);
 
-    if (userResult.error != null) {
-      return UserResultFormatter(null, userResult.error);
-    } else {
       _user.value = userResult.user!;
       log("User loaded: $user");
       return UserResultFormatter(userResult.user, null);
-    }
+    
   }
 
   @override

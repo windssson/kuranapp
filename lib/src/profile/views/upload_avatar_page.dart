@@ -13,8 +13,7 @@ import 'package:quran_app/src/profile/widgets/paste_avatarurl.dart';
 import 'package:quran_app/src/settings/theme/app_theme.dart';
 import 'package:r_dotted_line_border/r_dotted_line_border.dart';
 import 'package:unicons/unicons.dart';
-
-import '../../../helper/global_state.dart';
+import 'package:quran_app/helper/global_state.dart';
 
 class UploadAvatarPage extends StatelessWidget {
   UploadAvatarPage({Key? key}) : super(key: key);

@@ -128,6 +128,7 @@ class FillPassword extends StatelessWidget {
       _state.isLoadingGoogle(false);
       Get.back();
       Get.snackbar("Opps... asd", newUser.error.toString());
+      log('burada hata verdi');
     } else {
       _userController.loadUser(newUser.user?.email).then((value) {
         _state.isLoadingGoogle(false);

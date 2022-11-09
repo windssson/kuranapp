@@ -11,8 +11,7 @@ import 'package:quran_app/src/profile/formatter/response_formatter.dart';
 import 'package:quran_app/src/profile/views/signup_page.dart';
 import 'package:quran_app/src/settings/controller/settings_controller.dart';
 import 'package:quran_app/src/settings/theme/app_theme.dart';
-
-import '../../../helper/global_state.dart';
+import 'package:quran_app/helper/global_state.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({Key? key}) : super(key: key);
@@ -198,9 +197,10 @@ class SignInPage extends StatelessWidget {
       if (userResult.error != null) {
         _state.isLoadingGoogle(false);
 
-        Get.snackbar("Opps... asdasd ", "${userResult.error}, please register!");
+        Get.snackbar(
+            "Opps... asdasd ", "${userResult.error}, please register!");
       } else {
-        authController.signIn(userResult.user!.email.toString()).then((result) {
+        authController.signIn(userResult.user!.email!).then((result) {
           _state.isLoadingGoogle(false);
 
           if (result.error != null) {

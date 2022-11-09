@@ -1,10 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:http/http.dart' as http;
-
-import '../models/rss_feed.dart';
-
+import 'package:quran_app/src/articles/models/rss_feed.dart';
 const rss2JsonApiKey = "nsefnfsafaqpiwde3lggd8fitlzlyve0ozfhusja";
 
 class ArticleRepository {

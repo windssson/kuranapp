@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:quran_app/helper/constans.dart';
 

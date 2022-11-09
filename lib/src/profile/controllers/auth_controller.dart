@@ -8,8 +8,7 @@ import 'package:quran_app/src/profile/models/user.dart' as model;
 import 'package:quran_app/src/profile/repositories/user_repository.dart';
 import 'package:quran_app/src/profile/views/signin_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
-import '../../quran/view/surah_page.dart';
+import 'package:quran_app/src/quran/view/surah_page.dart';
 
 abstract class AuthController extends GetxController {
   Future<UserResultFormatter> signUp(
@@ -50,7 +49,8 @@ class AuthControllerImpl extends AuthController {
 
       return UserResultFormatter(user, null);
     } on PlatformException catch (e) {
-      return UserResultFormatter(null, 'Error - Google ile giriş başarısız.. $e');
+      return UserResultFormatter(
+          null, 'Error - Google ile giriş başarısız.. $e');
     }
   }
 
@@ -68,6 +68,18 @@ class AuthControllerImpl extends AuthController {
         return UserResultFormatter(null, 'Supabase giriş hatası');
       }
       box.write('user', res.session!.persistSessionString);
+      photoUrl ??= 'bos';
+      avatarUrl ??= 'bos';
+      name ??= 'bos';
+
+      log('*************************************');
+      log(res.user!.id);
+      log(password);
+      log(name);
+      log(email);
+      log(photoUrl);
+      log(avatarUrl);
+      log('*********************************');
 
       final result = await _userRepo.createUser({
         "uuid": res.user!.id,
@@ -75,12 +87,10 @@ class AuthControllerImpl extends AuthController {
         "email": email,
         "photo_url": photoUrl,
         "avatar_url": avatarUrl,
-      }).onError((error, stackTrace) {
-        log('üye kaydı olmadı ');
-        return UserResultFormatter(null, 'Hatalı giriş');
+        "bio": "bio"
       });
 
-      log("Sign up is successful for user ID: ${result.user!.id}");
+      log("Sign up is successful for user ID: windssson");
       return result;
     } catch (e) {
       log("Sign up error: Autsayfasi $e");

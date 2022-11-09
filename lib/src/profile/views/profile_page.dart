@@ -20,7 +20,7 @@ import 'package:quran_app/src/wrapper.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:unicons/unicons.dart';
 import 'package:wiredash/wiredash.dart';
-import '../../../helper/global_state.dart';
+import 'package:quran_app/helper/global_state.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({Key? key}) : super(key: key);

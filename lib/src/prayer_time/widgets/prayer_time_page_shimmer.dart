@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quran_app/src/prayer_time/widgets/prayer_time_card_shimmer.dart';
-
-import '../../widgets/app_card.dart';
-import '../../widgets/app_shimmer.dart';
+import 'package:quran_app/src/widgets/app_card.dart';
+import 'package:quran_app/src/widgets/app_shimmer.dart';
 
 class PrayerTimePageShimmer extends StatelessWidget {
   const PrayerTimePageShimmer({Key? key}) : super(key: key);

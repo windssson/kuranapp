@@ -83,7 +83,7 @@ class Wrapper extends StatelessWidget {
             // const SizedBox(height: 20),
             const Spacer(flex: 3),
             Text(
-              "Kuran-ı Kerim App",
+              "Bismillah",
               style: AppTextStyle.bigTitle,
             ),
             // DottedCircularProgressIndicatorFb(

@@ -53,7 +53,7 @@ class GoogleBtn1 extends StatelessWidget {
                   ),
                   const SizedBox(width: 5),
                   Text(
-                    "Loading...",
+                    "Yükleniyor...",
                     style: AppTextStyle.normal.copyWith(
                       color: Colors.grey,
                     ),

@@ -15,12 +15,12 @@ class GlobalState extends GetxController {
   String? validateEmail() {
     final text = emailText.value;
     if (text.isEmpty) {
-      emailError("Email can't be empty");
+      emailError("Email alanı boş olamaz");
       return emailError.value;
     }
 
     if (!GetUtils.isEmail(text)) {
-      emailError("Email is not valid");
+      emailError("Email kayıtlı değil");
       return emailError.value;
     }
 
@@ -30,12 +30,12 @@ class GlobalState extends GetxController {
   String? validatePassword() {
     final text = passwordText.value;
     if (text.isEmpty) {
-      passwordError("Password can't be empty");
+      passwordError("Şifre alanı boş olamaz");
       return passwordError.value;
     }
 
     if (text.length < 6) {
-      passwordError("Password too short, at least 6 characters");
+      passwordError("Şifre en az 6 karakter olmalıdır");
       return passwordError.value;
     }
 

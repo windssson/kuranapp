@@ -12,8 +12,7 @@ import 'package:quran_app/src/prayer_time/widgets/prayer_time_page_shimmer.dart'
 import 'package:quran_app/src/prayer_time/widgets/select_time.dart';
 import 'package:quran_app/src/settings/theme/app_theme.dart';
 import 'package:quran_app/src/widgets/app_card.dart';
-
-import '../controllers/prayer_time_controller.dart';
+import 'package:quran_app/src/prayer_time/controllers/prayer_time_controller.dart';
 
 class PrayerTimePage extends StatelessWidget {
   PrayerTimePage({Key? key}) : super(key: key);

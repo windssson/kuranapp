@@ -20,15 +20,14 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<UserResultFormatter> createUser(body) async {
-    final res = await supabase.from('Users').insert(body);
-    if (res.error != null) {
-      return UserResultFormatter(null, res.error?.message);
-    }
-
-    Map<String, dynamic> data = res.data[0];
-    var user = model.User.fromJson(data);
-
-    return UserResultFormatter(user, null);
+    final res =
+        await supabase.from('Users').insert(body).select().then((value) {
+      log(value.toString());
+      Map<String, dynamic> data = value[0];
+      var user = model.User.fromJson(data);
+      return UserResultFormatter(user, null);
+    });
+    return res;
   }
 
   @override
@@ -39,51 +38,44 @@ class UserRepositoryImpl implements UserRepository {
       },
     );
 
-    if (res.error != null) {
-      return UserResultFormatter(null, res.error?.message);
-    }
-
     return UserResultFormatter(res.data, null);
   }
 
   @override
   Future<UserResultFormatter> fetchUser(String? email) async {
-    final res = await supabase.from('Users').select('*').eq('email', email);
-    if (res.error != null) {
-      return UserResultFormatter(null, res.error?.message);
-    }
+    final res = await supabase
+        .from('Users')
+        .select('*')
+        .eq('email', email)
+        .then((value) {
+      List data = value;
+      log("User: $data");
+      var user = model.User();
 
-    List data = res.data;
-    log("User: $data");
-    var user = model.User();
+      for (var json in data) {
+        user = model.User.fromJson(json);
+      }
 
-    if (data.isEmpty) {
-      return UserResultFormatter(null, "Email not registered");
-    }
-
-    for (var json in data) {
-      user = model.User.fromJson(json);
-    }
-
-    return UserResultFormatter(user, null);
+      return UserResultFormatter(user, null);
+    });
+    return res;
   }
 
   @override
   Future<UserResultFormatter> updateUser(int? id, body) async {
-    final res = await supabase.from('Users').update(body).match({'id': id});
-
-    if (res.error != null) {
-      return UserResultFormatter(null, res.error?.message);
-    }
-
-    var data = res.data;
-    log("User: $data");
-    var user = model.User();
-    for (var json in (data as List)) {
-      user = model.User.fromJson(json);
-    }
-
-    return UserResultFormatter(user, null);
+    final res = await supabase
+        .from('Users')
+        .update(body)
+        .match({'id': id}).then((value) {
+      var data = value[0];
+      log('User : $data');
+      var user = model.User();
+      for (var json in (data as List)) {
+        user = model.User.fromJson(json);
+      }
+      return UserResultFormatter(user, null);
+    });
+    return res;
   }
 
   @override

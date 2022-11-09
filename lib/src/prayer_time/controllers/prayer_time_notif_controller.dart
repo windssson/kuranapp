@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:unicons/unicons.dart';
-
-import '../../../services/notification_service.dart';
-import '../../widgets/app_permission_status.dart';
+import 'package:quran_app/services/notification_service.dart';
+import 'package:quran_app/src/widgets/app_permission_status.dart';
 
 class PrayerTimeNotifController extends GetxController {
   var enableFajr = false.obs;
