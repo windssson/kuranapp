@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io' as ui;
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:universal_io/io.dart' as uio;
 
 import 'package:quran_app/src/profile/formatter/response_formatter.dart';
@@ -100,14 +99,14 @@ class UserRepositoryImpl implements UserRepository {
       String fileName, ui.File fileImage) async {
     uio.File file = uio.File(fileImage.path);
 
-    final res = await supabase.storage
+    await supabase.storage
         .from('assets')
         .upload(
           fileName,
           file,
         )
         .then((value) {
-      log('yükelndi');
+      log('yüklendi');
     }).onError((error, stackTrace) {
       log('baglanti reddedildi');
     });
