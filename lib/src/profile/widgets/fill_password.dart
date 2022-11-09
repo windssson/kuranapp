@@ -8,6 +8,7 @@ import 'package:quran_app/bricks/my_widgets/my_button.dart';
 import 'package:quran_app/src/profile/controllers/auth_controller.dart';
 import 'package:quran_app/src/profile/controllers/user_controller.dart';
 import 'package:quran_app/src/profile/models/user.dart';
+import 'package:quran_app/src/profile/repositories/user_repository.dart';
 import 'package:quran_app/src/profile/views/upload_avatar_page.dart';
 import 'package:quran_app/src/settings/theme/app_theme.dart';
 import 'package:unicons/unicons.dart';
@@ -123,6 +124,8 @@ class FillPassword extends StatelessWidget {
       name: googleUser?.name,
       photoUrl: googleUser?.photoUrl,
     );
+    
+    
 
     if (newUser.error != null) {
       _state.isLoadingGoogle(false);

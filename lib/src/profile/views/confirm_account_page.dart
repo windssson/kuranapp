@@ -22,7 +22,7 @@ class ConfirmAccountPage extends StatelessWidget {
   // final userController = Get.put(UserControllerImpl());
   final userController = Get.find<UserControllerImpl>();
   // final _state = Get.put(GlobalState());
-  final _state = Get.find<GlobalState>();
+  final _state = Get.put(GlobalState());
 
   @override
   Widget build(BuildContext context) {

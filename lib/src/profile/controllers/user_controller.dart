@@ -127,10 +127,15 @@ class UserControllerImpl extends UserController {
 
     final userResult = await userRepo.fetchUser(email);
 
-      _user.value = userResult.user!;
-      log("User loaded: $user");
-      return UserResultFormatter(userResult.user, null);
-    
+    _user.value = userResult.user!;
+    log("User loaded: $user");
+    return UserResultFormatter(_user.value, null);
+  }
+
+  loaderPass(String? email) async {
+    final userRepo = UserRepositoryImpl();
+    String sifre = await userRepo.verigetir(email!);
+    return sifre;
   }
 
   @override

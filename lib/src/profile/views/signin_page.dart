@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:get/get.dart';
@@ -159,10 +161,10 @@ class SignInPage extends StatelessWidget {
     final email = _state.validateEmail();
     final pass = _state.validatePassword();
     if (email != null) {
-      Get.snackbar("Opps... asdasdasd", email);
+      Get.snackbar("Email kayıtlı değil", email);
       _state.isSubmitted(false);
     } else if (pass != null) {
-      Get.snackbar("Opps...fghfghfh", pass);
+      Get.snackbar("Lütfen Kaydolun", pass);
       _state.isSubmitted(false);
     } else {
       _state.isSubmitted(false);
@@ -174,7 +176,7 @@ class SignInPage extends StatelessWidget {
         if (result.error != null) {
           _state.isLoading(false);
 
-          Get.snackbar("Opps... fghfghfgh", result.error.toString());
+          Get.snackbar("Hop Şifren Yanlışş", result.error.toString());
         } else {
           userController.loadUser(result.user?.email).then((value) {
             _state.isLoading(false);
@@ -190,21 +192,23 @@ class SignInPage extends StatelessWidget {
     UserResultFormatter googleUser = await authController.signInWithGoogle();
     if (googleUser.error != null) {
       _state.isLoadingGoogle(false);
-      Get.snackbar("Opps...werwer", googleUser.error.toString());
+      Get.snackbar("Google ile Giriş yapılamadı", googleUser.error.toString());
     } else {
-      final userResult = await userController.loadUser(googleUser.user?.email);
+      final userResult = await userController.loadUser(googleUser.user?.email!);
+      String sifre = await userController.loaderPass(googleUser.user?.email!);
+      
 
       if (userResult.error != null) {
         _state.isLoadingGoogle(false);
 
         Get.snackbar(
-            "Opps... asdasd ", "${userResult.error}, please register!");
+            "Hesap bulunamadı", "${userResult.error}");
       } else {
-        authController.signIn(userResult.user!.email!).then((result) {
+        authController.signIn(userResult.user!.email.toString(),password: sifre).then((result) {
           _state.isLoadingGoogle(false);
 
           if (result.error != null) {
-            Get.snackbar("Opps...erter ", result.error.toString());
+            Get.snackbar("Lütfen Kaydolun ", result.error.toString());
           } else {
             userController.loadUser(result.user?.email).then((value) {
               Get.offAll(const MainPage());

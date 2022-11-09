@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io' as ui;
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:universal_io/io.dart' as uio;
 
 import 'package:quran_app/src/profile/formatter/response_formatter.dart';
@@ -61,20 +62,36 @@ class UserRepositoryImpl implements UserRepository {
     return res;
   }
 
+  Future<String> verigetir(String email) async {
+    final res = await supabase
+        .from('Users')
+        .select('pass')
+        .eq('email', email)
+        .then((value) {
+      log('Gelen Pass Verisi ${value[0]['pass']}');
+      return value[0]['pass'];
+    });
+    return res;
+  }
+
   @override
   Future<UserResultFormatter> updateUser(int? id, body) async {
+    log(id!.toString());
     final res = await supabase
         .from('Users')
         .update(body)
-        .match({'id': id}).then((value) {
-      var data = value[0];
-      log('User : $data');
-      var user = model.User();
-      for (var json in (data as List)) {
-        user = model.User.fromJson(json);
-      }
-      return UserResultFormatter(user, null);
-    });
+        .match({'id': id})
+        .select()
+        .then((value) {
+          log(value.toString());
+          var data = value;
+          log('User : $data');
+          var user = model.User();
+          for (var json in (data as List)) {
+            user = model.User.fromJson(json);
+          }
+          return UserResultFormatter(user, null);
+        });
     return res;
   }
 
@@ -83,14 +100,17 @@ class UserRepositoryImpl implements UserRepository {
       String fileName, ui.File fileImage) async {
     uio.File file = uio.File(fileImage.path);
 
-    final res = await supabase.storage.from('assets').upload(
+    final res = await supabase.storage
+        .from('assets')
+        .upload(
           fileName,
           file,
-        );
-
-    if (res.isEmpty) {
-      return UploadResultFormatter('Dosya yükleme Hatası', null);
-    }
+        )
+        .then((value) {
+      log('yükelndi');
+    }).onError((error, stackTrace) {
+      log('baglanti reddedildi');
+    });
 
     // final result =
     //     supabase.storage.from('assets').getPublicUrl(res.data.toString());

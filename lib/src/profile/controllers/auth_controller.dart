@@ -68,17 +68,11 @@ class AuthControllerImpl extends AuthController {
         return UserResultFormatter(null, 'Supabase giriş hatası');
       }
       box.write('user', res.session!.persistSessionString);
-      photoUrl ??= 'bos';
-      avatarUrl ??= 'bos';
-      name ??= 'bos';
 
       log('*************************************');
       log(res.user!.id);
       log(password);
-      log(name);
       log(email);
-      log(photoUrl);
-      log(avatarUrl);
       log('*********************************');
 
       final result = await _userRepo.createUser({
@@ -87,10 +81,10 @@ class AuthControllerImpl extends AuthController {
         "email": email,
         "photo_url": photoUrl,
         "avatar_url": avatarUrl,
-        "bio": "bio"
+        "pass": password
       });
 
-      log("Sign up is successful for user ID: windssson");
+      log("Sign up is successful for user");
       return result;
     } catch (e) {
       log("Sign up error: Autsayfasi $e");
@@ -126,7 +120,7 @@ class AuthControllerImpl extends AuthController {
     try {
       final res = await _supabase.auth
           .signInWithPassword(email: email, password: password!);
-
+      log('Buradayımm');
       if (res.session == null) {
         log("Supabase giriş hatası");
         return UserResultFormatter(null, 'Supabase giriş hatası');
@@ -134,19 +128,22 @@ class AuthControllerImpl extends AuthController {
 
       var loggedInUser = res.user;
       var user = model.User();
-      user.email = loggedInUser?.email;
-      user.uid = loggedInUser?.id;
+      user.email = loggedInUser!.email;
+      user.uid = loggedInUser.id;
 
-      final box = Get.find<GetStorage>();
+      final box = Get.put(GetStorage());
+
+      log(res.session!.persistSessionString);
       box.write('user', res.session!.persistSessionString);
 
-      log("Sign in is successful for user ID: ${res.user?.id}");
+      log("Sign in is successful for user ID: giris yapan");
       return UserResultFormatter(user, null);
     } catch (e) {
-      log("Sign in error: $e");
+      log("Sign in error:asd $e");
       return UserResultFormatter(null, e.toString());
     }
   }
+
 
   @override
   Future<bool> signOut() async {
