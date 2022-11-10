@@ -95,12 +95,9 @@ class SurahItem extends StatelessWidget {
                     const SizedBox(height: 4),
                     Row(
                       children: [
+                        
                         Text(
-                          "$revelation",
-                          style: AppTextStyle.small,
-                        ),
-                        Text(
-                          " - $numberOfVerses Ayat",
+                          "$numberOfVerses Ayet",
                           style: AppTextStyle.small,
                         ),
                       ],

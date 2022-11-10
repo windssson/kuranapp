@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/src/settings/theme/app_theme.dart';
 
-class TafsirView extends StatelessWidget {
+class TafsirView extends StatefulWidget {
   const TafsirView(
       {Key? key, this.textTafsir, this.numberInSurah, required this.closeShow})
       : super(key: key);
@@ -9,6 +9,11 @@ class TafsirView extends StatelessWidget {
   final int? numberInSurah;
   final void Function() closeShow;
 
+  @override
+  State<TafsirView> createState() => _TafsirViewState();
+}
+
+class _TafsirViewState extends State<TafsirView> {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
@@ -38,7 +43,7 @@ class TafsirView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               IconButton(
-                onPressed: closeShow,
+                onPressed: widget.closeShow,
                 icon: const Icon(
                   Icons.highlight_remove_rounded,
                   size: 30,
@@ -51,7 +56,7 @@ class TafsirView extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "Tafsir Ayat ke - $numberInSurah",
+                        "Tafsir Ayat ke - ${widget.numberInSurah}",
                         style: AppTextStyle.title,
                       ),
                       const SizedBox(height: 16),
@@ -62,7 +67,7 @@ class TafsirView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          "$textTafsir",
+                          "${widget.textTafsir}",
                           style: AppTextStyle.normal.copyWith(
                             fontWeight: FontWeight.normal,
                           ),

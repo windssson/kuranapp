@@ -163,7 +163,7 @@ class FavoritePage extends StatelessWidget {
                                             onPressed: (context) {
                                               Get.dialog(ConfirmDeleteFavorite(
                                                 message:
-                                                    "Are you sure you want to \nremove Surah \"${surahC.surahFavorites.toList()[i].name?.id}\" \nfrom favorite?",
+                                                    "Are you sure you want to \nremove Surah \"${surahC.surahFavorites.toList()[i].name}\" \nfrom favorite?",
                                                 onCancel: () => Get.back(),
                                                 onDelete: () {
                                                   surahC
@@ -196,7 +196,7 @@ class FavoritePage extends StatelessWidget {
                                             onPressed: (context) {
                                               Get.dialog(ConfirmDeleteFavorite(
                                                 message:
-                                                    "Are you sure you want to \nremove Surah \"${surahC.surahFavorites.toList()[i].name?.id}\" \nfrom favorite?",
+                                                    "Are you sure you want to \nremove Surah \"${surahC.surahFavorites.toList()[i].name}\" \nfrom favorite?",
                                                 onCancel: () => Get.back(),
                                                 onDelete: () {
                                                   surahC
@@ -240,17 +240,13 @@ class FavoritePage extends StatelessWidget {
                                               .number,
                                           nameShort: surahC.surahFavorites
                                               .toList()[i]
-                                              .name!
-                                              .arab,
-                                          revelation: surahC.surahFavorites
-                                              .toList()[i]
-                                              .revelation!
-                                              .id,
+                                              .name,
+                                              
+                                          
                                           nameTransliteration: surahC
                                               .surahFavorites
                                               .toList()[i]
-                                              .name!
-                                              .id,
+                                              .name,
                                           numberOfVerses: surahC.surahFavorites
                                               .toList()[i]
                                               .numberOfVerses,

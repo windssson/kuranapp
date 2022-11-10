@@ -264,7 +264,7 @@ class HomePage extends StatelessWidget {
                                     () => surahC.recenlySurah.name != null
                                         ? Text(
                                             "Surah " +
-                                                surahC.recenlySurah.name!.id
+                                                surahC.recenlySurah.name
                                                     .toString(),
                                             style: AppTextStyle.normal,
                                           )

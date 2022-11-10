@@ -6,7 +6,6 @@ class SurahCard extends StatelessWidget {
     Key? key,
     this.number,
     this.nameTransliteration,
-    this.revelation,
     this.nameShort,
     this.numberOfVerses,
     this.nameTranslation,
@@ -14,7 +13,6 @@ class SurahCard extends StatelessWidget {
   final int? number;
   final String? nameTransliteration;
   final String? nameTranslation;
-  final String? revelation;
   final String? nameShort;
   final int? numberOfVerses;
 
@@ -69,7 +67,7 @@ class SurahCard extends StatelessWidget {
               Chip(
                 backgroundColor: Theme.of(context).cardColor,
                 label: Text(
-                  "$revelation",
+                  "Devran",
                   style: AppTextStyle.small,
                 ),
               ),
@@ -77,7 +75,7 @@ class SurahCard extends StatelessWidget {
               Chip(
                 backgroundColor: Theme.of(context).cardColor,
                 label: Text(
-                  "$numberOfVerses Ayat",
+                  "$numberOfVerses Ayet",
                   style: AppTextStyle.small,
                 ),
               ),

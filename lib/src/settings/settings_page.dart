@@ -13,7 +13,7 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Settings",
+          "Ayarlar",
           style: AppTextStyle.bigTitle,
         ),
         centerTitle: true,
@@ -42,7 +42,7 @@ class SettingsPage extends StatelessWidget {
                   ),
                   const SizedBox(width: 16),
                   Text(
-                    "Change App Theme",
+                    "Tema",
                     style: AppTextStyle.normal,
                   ),
                   const Spacer(),

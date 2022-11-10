@@ -25,8 +25,8 @@ class SurahController extends GetxController {
       _listOfSearchedSurah.clear();
     } else {
       for (var item in _listOfSurah) {
-        double similiarity = query.similarityTo(item.name?.id?.toLowerCase());
-        String s = "${item.name?.id} = $similiarity";
+        double similiarity = query.similarityTo(item.name!.toLowerCase());
+        String s = "${item.name} = $similiarity";
         if (similiarity >= 0.7) {
           log(s);
           _listOfSearchedSurah.add(item);
@@ -41,9 +41,6 @@ class SurahController extends GetxController {
     _verses.clear();
     log("${_verses.length}");
   }
-
-  final _audioUrl = <String>[].obs;
-  List<String> get audioUrl => _audioUrl();
 
   var isLoading = false.obs;
   var showTafsir = false.obs;
@@ -61,8 +58,9 @@ class SurahController extends GetxController {
 
     try {
       final url = Uri.parse("https://hiquran-api.herokuapp.com/surah");
+      final url2 = Uri.parse('https://api.acikkuran.com/surahs');
       isLoading.value = true;
-      final response = await http.get(url);
+      final response = await http.get(url2);
 
       if (response.statusCode == 200) {
         var map = jsonDecode(response.body);
@@ -93,12 +91,15 @@ class SurahController extends GetxController {
 
   Future<bool> fetchSurahByID(int? id) async {
     resetVerses();
+    log(id.toString());
 
     final url = Uri.parse("https://hiquran-api.herokuapp.com/surah/$id");
+    final url2 = Uri.parse('https://api.acikkuran.com/surah/$id');
     // isLoading.value = true;
-    final response = await http.get(url);
+    final response = await http.get(url2);
 
     if (response.statusCode == 200) {
+      log('Veri Geldi');
       var map = jsonDecode(response.body);
       var verses = map['data']['verses'];
       for (var json in (verses as List)) {
@@ -108,11 +109,10 @@ class SurahController extends GetxController {
         // if (_verses.length < 2) {
         //   await Future.delayed(const Duration(milliseconds: 200));
         // }
-        _audioUrl.add(verse.audio!.primary ?? "");
       }
 
       log(_verses.length.toString());
-      log("audios = ${_audioUrl.length}");
+
       return true;
     } else {
       // isLoading.value = false;

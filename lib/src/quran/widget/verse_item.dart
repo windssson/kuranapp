@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:quran_app/src/settings/theme/app_theme.dart';
 
@@ -81,7 +83,9 @@ class VerseItem extends StatelessWidget {
             textAlign: TextAlign.start,
           ),
           InkWell(
-            onTap: onTapSeeTafsir,
+            onTap: () {
+              log('See Tasvire Tıklandı');
+            },
             child: Container(
               width: double.infinity,
               margin: const EdgeInsets.only(top: 16),
@@ -93,7 +97,7 @@ class VerseItem extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  "See Tafsir",
+                  "Dinle",
                   style: AppTextStyle.normal.copyWith(
                     color: Theme.of(context).primaryColor,
                     fontSize: 14,

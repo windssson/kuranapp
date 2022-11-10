@@ -121,7 +121,7 @@ class SearchQuranPage extends StatelessWidget {
                                         .toList()[i],
                                   ),
                                   routeName:
-                                      '/surah/${controller.listOfSerchedSurah.toList()[i].name!.id?.toLowerCase()}',
+                                      '/surah/${controller.listOfSerchedSurah.toList()[i].name!.toLowerCase()}',
                                 );
                               },
                               child: SurahItem(
@@ -132,17 +132,12 @@ class SearchQuranPage extends StatelessWidget {
                                     .number,
                                 nameShort: controller.listOfSerchedSurah
                                     .toList()[i]
-                                    .name!
-                                    .arab,
-                                revelation: controller.listOfSerchedSurah
-                                    .toList()[i]
-                                    .revelation!
-                                    .id,
+                                    .name,
+                               
                                 nameTransliteration: controller
                                     .listOfSerchedSurah
                                     .toList()[i]
-                                    .name!
-                                    .id,
+                                    .name,
                                 numberOfVerses: controller.listOfSerchedSurah
                                     .toList()[i]
                                     .numberOfVerses,

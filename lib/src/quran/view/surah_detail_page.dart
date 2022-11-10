@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +10,7 @@ import 'package:quran_app/src/profile/views/signin_page.dart';
 import 'package:quran_app/src/quran/controller/surah_controller.dart';
 import 'package:quran_app/src/quran/model/surah.dart';
 import 'package:quran_app/src/quran/model/verse.dart';
+import 'package:quran_app/src/quran/view/favorite_page.dart';
 import 'package:quran_app/src/quran/widget/shimmer/surah_detail_page_shimmer.dart';
 import 'package:quran_app/src/quran/widget/surah_card.dart';
 import 'package:quran_app/src/quran/widget/tafsir_view.dart';
@@ -31,11 +34,11 @@ class SurahDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // controller.resetVerses();
-
+    log('Buraya geldi');
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Quran",
+          "Kuran-ı Kerim",
           style: AppTextStyle.bigTitle,
         ),
         actions: [
@@ -110,10 +113,9 @@ class SurahDetailPage extends StatelessWidget {
                         SurahCard(
                           number: surah.number,
                           nameShort: "${surah.name}",
-                          nameTranslation: "${surah.name?.translationId}",
-                          nameTransliteration: "${surah.name?.id}",
+                          nameTranslation: "Yusuf",
+                          nameTransliteration: "Yusuf",
                           numberOfVerses: surah.numberOfVerses,
-                          revelation: "${surah.revelation?.id}",
                         ),
                         // const SizedBox(height: 10),
                         if (!snapshot.hasData) const SurahDetailPageShimmer(),
@@ -123,8 +125,7 @@ class SurahDetailPage extends StatelessWidget {
                             child: VerseItem(
                               numberInSurah: verse.number!.inSurah,
                               textArab: verse.text!.arab,
-                              textTransliteration:
-                                  verse.text!.transliteration!.en,
+                              textTransliteration: verse.text!.transliteration,
                               textTranslation: verse.translation!.id,
                               onTapSeeTafsir: () {
                                 if (controller.showTafsir.value) {
@@ -152,7 +153,7 @@ class SurahDetailPage extends StatelessWidget {
 
   _buildTafsirView(Verse verse) {
     tafsirView = TafsirView(
-      textTafsir: verse.tafsir!.id!.long,
+      textTafsir: 'asdasd asdasd asdasd asdasdlka laskdl kasl kasl dkasld kal',
       numberInSurah: verse.number!.inSurah,
       closeShow: () {
         controller.showTafsir.value = false;

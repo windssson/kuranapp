@@ -25,7 +25,7 @@ class SurahPage extends StatelessWidget {
       key: _key,
       appBar: AppBar(
         title: Text(
-          "Quran",
+          "Kuran-ı Kerim",
           style: AppTextStyle.bigTitle,
         ),
 
@@ -163,16 +163,14 @@ class SurahPage extends StatelessWidget {
                               child: SurahItem(
                                 number:
                                     controller.listOfSurah.toList()[i].number,
-                                nameShort: controller.listOfSurah
-                                    .toList()[i]
-                                    .name!
-                                    .arab,
-                                revelation: controller.listOfSurah
-                                    .toList()[i]
-                                    .revelation!
-                                    .id,
+                                nameShort: 
+                                controller.listOfSurah
+                                   .toList()[i]
+                                   .namearab,
+                                
                                 nameTransliteration:
-                                    controller.listOfSurah.toList()[i].name!.id,
+                                    controller.listOfSurah.toList()[i].name,
+                                    
                                 numberOfVerses: controller.listOfSurah
                                     .toList()[i]
                                     .numberOfVerses,
