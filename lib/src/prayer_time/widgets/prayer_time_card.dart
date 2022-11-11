@@ -4,6 +4,7 @@ import 'package:adhan/adhan.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quran_app/helper/global_state.dart';
 import 'package:quran_app/src/prayer_time/controllers/prayer_time_controller.dart';
 import 'package:quran_app/src/settings/theme/app_theme.dart';
 import 'package:quran_app/src/widgets/app_card.dart';
@@ -134,11 +135,13 @@ class PrayerTimeCard extends StatelessWidget {
                       TextSpan(
                         text: (nextH != null &&
                                 prayerTimeC.nextPrayer.value.name == "none")
-                            ? "Qiyam"
+                            ? "Kıyam"
                             : (nextH == null)
                                 ? ""
-                                : prayerTimeC
-                                    .nextPrayer.value.name.capitalizeFirst,
+                                : GlobalState().gunCevir(prayerTimeC
+                                    .nextPrayer.value.name.capitalizeFirst
+                                    .toString()
+                                    .toLowerCase()),
                         children: [
                           const TextSpan(text: " - "),
                           TextSpan(
@@ -203,7 +206,7 @@ class PrayerTimeCard extends StatelessWidget {
                 isReverse: true,
                 onComplete: () async {
                   prayerTimeC.leftOver.value = 0;
-                  log("--- Now is ${prayerTimeC.nextPrayer} time ---");
+                  log("--- ${prayerTimeC.nextPrayer} time ---");
 
                   await Future.delayed(2.seconds);
 

@@ -50,7 +50,7 @@ class ConfirmDeleteFavorite extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               MyButton(
-                text: "Cancel",
+                text: "İptal",
                 onPressed: onCancel,
                 color: Colors.grey.shade100,
                 onPrimaryColor: ColorPalletes.bgDarkColor,
@@ -59,7 +59,7 @@ class ConfirmDeleteFavorite extends StatelessWidget {
               const SizedBox(height: 16),
               Obx(
                 () => MyButton(
-                  text: "Delete",
+                  text: "Hepsini Sil",
                   onPressed: onDelete,
                   color: Colors.red,
                   onPrimaryColor: Colors.white,

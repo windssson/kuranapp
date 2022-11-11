@@ -50,17 +50,17 @@ class MyButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   DottedCircularProgressIndicatorFb(
-                    currentDotColor: (text == "Delete")
+                    currentDotColor: (text == "Sil")
                         ? Colors.white70
                         : Theme.of(context).cardColor.withOpacity(0.3),
-                    defaultDotColor: (text == "Delete")
+                    defaultDotColor: (text == "Sil")
                         ? Colors.white
                         : Theme.of(context).cardColor,
                     numDots: 7,
                     dotSize: 3,
                   ),
-                  if (text != "Delete") const SizedBox(width: 5),
-                  if (text != "Delete")
+                  if (text != "Sil") const SizedBox(width: 5),
+                  if (text != "Sil")
                     Text(
                       "Yükleniyor...",
                       style: AppTextStyle.normal.copyWith(

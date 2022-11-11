@@ -141,14 +141,14 @@ class HomePage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Assalamu'alaikum,",
+                                "Selamın Aleykum",
                                 style: AppTextStyle.small.copyWith(
                                   fontSize: 14,
                                 ),
                               ),
                               Obx(
                                 () => Text(
-                                  userC.user.name ?? "Hamba Allah",
+                                  userC.user.name ?? "Misafir",
                                   style: AppTextStyle.title,
                                 ),
                               ),
@@ -241,7 +241,7 @@ class HomePage extends StatelessWidget {
                                       ),
                                       const SizedBox(width: 8),
                                       Text(
-                                        "Last Read",
+                                        "Son Okunan Sure",
                                         style: AppTextStyle.small.copyWith(
                                           color: Colors.grey,
                                         ),
@@ -252,8 +252,8 @@ class HomePage extends StatelessWidget {
                                   Obx(
                                     () => Text(
                                       surahC.recenlySurah.name != null
-                                          ? "Quran"
-                                          : "Opps",
+                                          ? "Kuran-ı Kerim"
+                                          : "Eyvah",
                                       style: AppTextStyle.bigTitle.copyWith(
                                         color: Theme.of(context).primaryColor,
                                       ),
@@ -263,13 +263,13 @@ class HomePage extends StatelessWidget {
                                   Obx(
                                     () => surahC.recenlySurah.name != null
                                         ? Text(
-                                            "Surah " +
-                                                surahC.recenlySurah.name
-                                                    .toString(),
+                                            surahC.recenlySurah.name
+                                                    .toString() +
+                                                " suresi",
                                             style: AppTextStyle.normal,
                                           )
                                         : Text(
-                                            "You haven't read the quran lately.",
+                                            "Hemen Kuran okumaya başla",
                                             style: AppTextStyle.small,
                                           ),
                                   ),
@@ -307,8 +307,8 @@ class HomePage extends StatelessWidget {
                               child: Obx(
                                 () => Text(
                                   surahC.recenlySurah.name != null
-                                      ? "Read again"
-                                      : "Read Quran",
+                                      ? "Okumaya Devam Et"
+                                      : "Kuran Oku",
                                   style: AppTextStyle.normal.copyWith(
                                     color: Theme.of(context).primaryColor,
                                     fontSize: 14,
@@ -329,7 +329,7 @@ class HomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Daily Articles",
+                        "Son Yazılar",
                         style: AppTextStyle.bigTitle.copyWith(
                           fontSize: 18,
                         ),
@@ -337,7 +337,7 @@ class HomePage extends StatelessWidget {
                       InkWell(
                         onTap: () => Get.to(() => const ArticlesPage()),
                         child: Text(
-                          "See All",
+                          "Hepsini Gör",
                           style: AppTextStyle.small.copyWith(
                             color: Theme.of(context).primaryColor,
                           ),
@@ -401,7 +401,7 @@ class HomePage extends StatelessWidget {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              "See All",
+                                              "Hepsini Gör",
                                               style: AppTextStyle.normal,
                                             ),
                                             const SizedBox(height: 10),

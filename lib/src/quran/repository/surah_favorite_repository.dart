@@ -24,8 +24,8 @@ class SurahFavoriteRepositoryImpl implements SurahFavoriteRepository {
         .onError((error, stackTrace) {
       return SurahFavoriteFormatter(error.toString(), null);
     });
-
-    List data = res.data;
+    log(res.toString());
+    List data = res;
     log("Surah Favorites: $data");
     List<SurahFavorite> surahFavorites = [];
 
@@ -45,13 +45,9 @@ class SurahFavoriteRepositoryImpl implements SurahFavoriteRepository {
     final res = await supabase.from('SurahFavorites').insert({
       'user_id': userID,
       'surah_id': surahID,
-    }).onError((error, stackTrace) {
-      return SurahFavoriteFormatter(error.toString(), null);
-    });
-
-    
-
-    SurahFavorite data = SurahFavorite.fromJson(res.data[0]);
+    }).select();
+    log(res.toString());
+    SurahFavorite data = SurahFavorite.fromJson(res[0]);
 
     return SurahFavoriteFormatter(null, [data]);
   }
@@ -64,10 +60,10 @@ class SurahFavoriteRepositoryImpl implements SurahFavoriteRepository {
         'user_id': userID,
         'surah_id': surahID,
       },
-    ).onError((error, stackTrace) => SurahFavoriteFormatter(error.toString(), null));
+    ).select().onError(
+        (error, stackTrace) => SurahFavoriteFormatter(error.toString(), null));
 
-
-    SurahFavorite data = SurahFavorite.fromJson(res.data[0]);
+    SurahFavorite data = SurahFavorite.fromJson(res[0]);
 
     return SurahFavoriteFormatter(null, [data]);
   }
@@ -78,10 +74,10 @@ class SurahFavoriteRepositoryImpl implements SurahFavoriteRepository {
       {
         'user_id': userID,
       },
-    ).onError((error, stackTrace) => SurahFavoriteFormatter(error.toString(), null));
+    ).select().onError(
+        (error, stackTrace) => SurahFavoriteFormatter(error.toString(), null));
 
-
-    List data = res.data;
+    List data = res;
     List<SurahFavorite> surahFavorites = [];
 
     if (data.isNotEmpty) {

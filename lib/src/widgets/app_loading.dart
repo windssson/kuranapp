@@ -30,7 +30,7 @@ class AppLoading extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              "Wait a moment...",
+              "Lütfen bekleyiniz...",
               style: AppTextStyle.small,
             )
           ],

@@ -57,7 +57,7 @@ class SurahController extends GetxController {
     _listOfSurah.clear();
 
     try {
-      final url = Uri.parse("https://hiquran-api.herokuapp.com/surah");
+      //final url = Uri.parse("https://hiquran-api.herokuapp.com/surah");
       final url2 = Uri.parse('https://api.acikkuran.com/surahs');
       isLoading.value = true;
       final response = await http.get(url2);
@@ -93,7 +93,7 @@ class SurahController extends GetxController {
     resetVerses();
     log(id.toString());
 
-    final url = Uri.parse("https://hiquran-api.herokuapp.com/surah/$id");
+    // final url = Uri.parse("https://hiquran-api.herokuapp.com/surah/$id");
     final url2 = Uri.parse('https://api.acikkuran.com/surah/$id');
     // isLoading.value = true;
     final response = await http.get(url2);
@@ -141,7 +141,7 @@ class SurahController extends GetxController {
     } else {
       if (value.surahFavorites!.isNotEmpty) {
         _surahFavorites.add(surah);
-        printInfo(info: "add to favorite");
+        log('sure favorilere eklendi');
       }
       return true;
     }

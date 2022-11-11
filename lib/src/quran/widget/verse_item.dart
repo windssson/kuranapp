@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:quran_app/src/settings/theme/app_theme.dart';
 
@@ -81,30 +79,6 @@ class VerseItem extends StatelessWidget {
             "$textTranslation",
             style: AppTextStyle.normal.copyWith(fontSize: 14),
             textAlign: TextAlign.start,
-          ),
-          InkWell(
-            onTap: () {
-              log('See Tasvire Tıklandı');
-            },
-            child: Container(
-              width: double.infinity,
-              margin: const EdgeInsets.only(top: 16),
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [AppShadow.card],
-              ),
-              child: Center(
-                child: Text(
-                  "Dinle",
-                  style: AppTextStyle.normal.copyWith(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ),
           ),
         ],
       ),

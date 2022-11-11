@@ -5,6 +5,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:group_button/group_button.dart';
+import 'package:quran_app/helper/global_state.dart';
 import 'package:quran_app/services/notification_service.dart';
 import 'package:quran_app/src/prayer_time/controllers/prayer_time_notif_controller.dart';
 import 'package:quran_app/src/prayer_time/widgets/prayer_time_card.dart';
@@ -33,7 +34,7 @@ class PrayerTimePage extends StatelessWidget {
       // drawer: AppDrawer(),
       appBar: AppBar(
         title: Text(
-          "Prayer Times",
+          "Namaz Vakitleri",
           style: AppTextStyle.bigTitle,
         ),
         // leading: IconButton(
@@ -58,367 +59,353 @@ class PrayerTimePage extends StatelessWidget {
       // ),
       // alignment: Alignment.topCenter,
 
-      body: RefreshIndicator(
-        onRefresh: () async {
-          await Future.delayed(const Duration(milliseconds: 1500));
-          toNextPrayer();
-        },
-        backgroundColor: Theme.of(context).cardColor,
-        color: Theme.of(context).primaryColor,
-        strokeWidth: 3,
-        triggerMode: RefreshIndicatorTriggerMode.onEdge,
-        child: Obx(() {
-          return prayerTimeC.isLoadLocation.value
-              ? const SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  child: PrayerTimePageShimmer(),
-                )
-              : SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: ListView(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    physics: const AlwaysScrollableScrollPhysics(),
+      body: Obx(() {
+        return prayerTimeC.isLoadLocation.value
+            ? const SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: PrayerTimePageShimmer(),
+              )
+            : SizedBox(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: ListView(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  physics: const AlwaysScrollableScrollPhysics(),
 
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Today",
-                        style: AppTextStyle.title,
-                      ),
-                      const SizedBox(height: 10),
-                      Hero(
-                        tag: 'prayer_time_card',
-                        child: PrayerTimeCard(prayerTimeC: prayerTimeC),
-                      ),
-                      const SizedBox(height: 20),
-                      Obx(() {
-                        var time = prayerTimeC.prayerTimesToday.value;
-                        var shubuh = time.shubuh;
-                        var sunrise = time.sunrise;
-                        var dhuhur = time.dhuhur;
-                        var ashar = time.ashar;
-                        var maghrib = time.maghrib;
-                        var isya = time.isya;
-                        var lastThirdOfTheNight = time.lastThirdOfTheNight;
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Bugün",
+                      style: AppTextStyle.title,
+                    ),
+                    const SizedBox(height: 10),
+                    Hero(
+                      tag: 'prayer_time_card',
+                      child: PrayerTimeCard(prayerTimeC: prayerTimeC),
+                    ),
+                    const SizedBox(height: 20),
+                    Obx(() {
+                      var time = prayerTimeC.prayerTimesToday.value;
+                      var shubuh = time.shubuh;
+                      var sunrise = time.sunrise;
+                      var dhuhur = time.dhuhur;
+                      var ashar = time.ashar;
+                      var maghrib = time.maghrib;
+                      var isya = time.isya;
+                      var lastThirdOfTheNight = time.lastThirdOfTheNight;
 
-                        List<DateTime?> prayerTimes = [
-                          shubuh,
-                          sunrise,
-                          dhuhur,
-                          ashar,
-                          maghrib,
-                          isya,
-                          lastThirdOfTheNight,
-                        ];
+                      List<DateTime?> prayerTimes = [
+                        shubuh,
+                        sunrise,
+                        dhuhur,
+                        ashar,
+                        maghrib,
+                        isya,
+                        lastThirdOfTheNight,
+                      ];
 
-                        List<bool> enableNotif = [
-                          prayerTimeNotifC.enableFajr.value,
-                          prayerTimeNotifC.enableSunrise.value,
-                          prayerTimeNotifC.enableDhuhr.value,
-                          prayerTimeNotifC.enableAsr.value,
-                          prayerTimeNotifC.enableMaghrib.value,
-                          prayerTimeNotifC.enableIsha.value,
-                          prayerTimeNotifC.enableQiyam.value,
-                        ];
+                      List<bool> enableNotif = [
+                        prayerTimeNotifC.enableFajr.value,
+                        prayerTimeNotifC.enableSunrise.value,
+                        prayerTimeNotifC.enableDhuhr.value,
+                        prayerTimeNotifC.enableAsr.value,
+                        prayerTimeNotifC.enableMaghrib.value,
+                        prayerTimeNotifC.enableIsha.value,
+                        prayerTimeNotifC.enableQiyam.value,
+                      ];
 
-                        List prayerNames = [
-                          Prayer.fajr.name.capitalize,
-                          Prayer.sunrise.name.capitalize,
-                          Prayer.dhuhr.name.capitalize,
-                          Prayer.asr.name.capitalize,
-                          Prayer.maghrib.name.capitalize,
-                          Prayer.isha.name.capitalize,
-                          "Qiyam",
-                        ];
+                      List prayerNames = [
+                        Prayer.fajr.name.capitalize,
+                        Prayer.sunrise.name.capitalize,
+                        Prayer.dhuhr.name.capitalize,
+                        Prayer.asr.name.capitalize,
+                        Prayer.maghrib.name.capitalize,
+                        Prayer.isha.name.capitalize,
+                        "Kıyam",
+                      ];
 
-                        return FadeInDown(
-                          from: 40,
-                          child: AppCard(
-                            hMargin: 0,
-                            child: SizedBox(
-                              height: 432,
-                              width: MediaQuery.of(context).size.width,
-                              child: ListView.separated(
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, i) {
-                                  return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "${prayerTimes[i]?.hour.toString().padLeft(2, '0') ?? "--"}:${prayerTimes[i]?.minute.toString().padLeft(2, '0') ?? "--"}",
-                                        style: AppTextStyle.normal.copyWith(
-                                          fontSize: 16,
-                                        ),
+                      return FadeInDown(
+                        from: 40,
+                        child: AppCard(
+                          hMargin: 0,
+                          child: SizedBox(
+                            height: 432,
+                            width: MediaQuery.of(context).size.width,
+                            child: ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, i) {
+                                return Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${prayerTimes[i]?.hour.toString().padLeft(2, '0') ?? "--"}:${prayerTimes[i]?.minute.toString().padLeft(2, '0') ?? "--"}",
+                                      style: AppTextStyle.normal.copyWith(
+                                        fontSize: 16,
                                       ),
-                                      const SizedBox(width: 16),
-                                      Chip(
-                                        labelPadding:
-                                            const EdgeInsets.symmetric(
-                                                horizontal: 8),
-                                        backgroundColor: Get.isDarkMode
-                                            ? Theme.of(context)
-                                                .cardColor
-                                                .withOpacity(0.7)
-                                            : Theme.of(context)
-                                                .primaryColor
-                                                .withOpacity(0.1),
-                                        label: Text(
-                                          prayerNames[i],
-                                          style: AppTextStyle.small.copyWith(
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                            // fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      Text(
-                                        "${prayerTimes[i]?.day.toString().padLeft(2, '0') ?? "--"}/${prayerTimes[i]?.month.toString().padLeft(2, '0') ?? "--"}/${prayerTimes[i]?.year ?? "--"}",
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Chip(
+                                      labelPadding: const EdgeInsets.symmetric(
+                                          horizontal: 8),
+                                      backgroundColor: Get.isDarkMode
+                                          ? Theme.of(context)
+                                              .cardColor
+                                              .withOpacity(0.7)
+                                          : Theme.of(context)
+                                              .primaryColor
+                                              .withOpacity(0.1),
+                                      label: Text(
+                                        GlobalState().gunCevir(prayerNames[i]
+                                            .toString()
+                                            .toLowerCase()),
                                         style: AppTextStyle.small.copyWith(
-                                          color: Colors.grey,
+                                          color: Theme.of(context).primaryColor,
+                                          // fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      const SizedBox(width: 8),
-                                      IconButton(
-                                        onPressed: () {
-                                          groupBtnController.unselectAll();
+                                    ),
+                                    const Spacer(),
+                                    Text(
+                                      "${prayerTimes[i]?.day.toString().padLeft(2, '0') ?? "--"}/${prayerTimes[i]?.month.toString().padLeft(2, '0') ?? "--"}/${prayerTimes[i]?.year ?? "--"}",
+                                      style: AppTextStyle.small.copyWith(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    IconButton(
+                                      onPressed: () {
+                                        groupBtnController.unselectAll();
 
-                                          switch (i) {
-                                            case 0:
-                                              if (prayerTimeNotifC
-                                                  .enableFajr.isTrue) {
-                                                cancelScheduleNotification(
-                                                  prayerTimeNotifC.fajrId.value,
-                                                  "fajr",
-                                                ).then((_) {
-                                                  // Change notif icon
-                                                  prayerTimeNotifC
-                                                          .enableFajr.value =
-                                                      !prayerTimeNotifC
-                                                          .enableFajr.value;
+                                        switch (i) {
+                                          case 0:
+                                            if (prayerTimeNotifC
+                                                .enableFajr.isTrue) {
+                                              cancelScheduleNotification(
+                                                prayerTimeNotifC.fajrId.value,
+                                                "fajr",
+                                              ).then((_) {
+                                                // Change notif icon
+                                                prayerTimeNotifC
+                                                        .enableFajr.value =
+                                                    !prayerTimeNotifC
+                                                        .enableFajr.value;
 
-                                                  // save to local db
-                                                  prayerTimeNotifC.writeBox(
-                                                    key: 'fajr_notif',
-                                                    value: prayerTimeNotifC
-                                                        .enableFajr.value
-                                                        .toString(),
-                                                  );
-                                                });
-                                              } else {
-                                                showSetPrayerTime(
-                                                  prayerTime: prayerTimes[0]!,
-                                                  prayerName: prayerNames[0],
+                                                // save to local db
+                                                prayerTimeNotifC.writeBox(
+                                                  key: 'fajr_notif',
+                                                  value: prayerTimeNotifC
+                                                      .enableFajr.value
+                                                      .toString(),
                                                 );
-                                              }
+                                              });
+                                            } else {
+                                              showSetPrayerTime(
+                                                prayerTime: prayerTimes[0]!,
+                                                prayerName: prayerNames[0],
+                                              );
+                                            }
 
-                                              break;
-                                            case 1:
-                                              if (prayerTimeNotifC
-                                                  .enableSunrise.isTrue) {
-                                                cancelScheduleNotification(
-                                                  prayerTimeNotifC
-                                                      .sunriseId.value,
-                                                  "sunrise",
-                                                ).then((_) {
-                                                  // Change notif icon
-                                                  prayerTimeNotifC
-                                                          .enableSunrise.value =
-                                                      !prayerTimeNotifC
-                                                          .enableSunrise.value;
+                                            break;
+                                          case 1:
+                                            if (prayerTimeNotifC
+                                                .enableSunrise.isTrue) {
+                                              cancelScheduleNotification(
+                                                prayerTimeNotifC
+                                                    .sunriseId.value,
+                                                "sunrise",
+                                              ).then((_) {
+                                                // Change notif icon
+                                                prayerTimeNotifC
+                                                        .enableSunrise.value =
+                                                    !prayerTimeNotifC
+                                                        .enableSunrise.value;
 
-                                                  prayerTimeNotifC.writeBox(
-                                                    key: 'sunrise_notif',
-                                                    value: prayerTimeNotifC
-                                                        .enableSunrise.value
-                                                        .toString(),
-                                                  );
-                                                });
-                                              } else {
-                                                showSetPrayerTime(
-                                                  prayerTime: prayerTimes[1]!,
-                                                  prayerName: prayerNames[1],
+                                                prayerTimeNotifC.writeBox(
+                                                  key: 'sunrise_notif',
+                                                  value: prayerTimeNotifC
+                                                      .enableSunrise.value
+                                                      .toString(),
                                                 );
-                                              }
+                                              });
+                                            } else {
+                                              showSetPrayerTime(
+                                                prayerTime: prayerTimes[1]!,
+                                                prayerName: prayerNames[1],
+                                              );
+                                            }
 
-                                              break;
-                                            case 2:
-                                              if (prayerTimeNotifC
-                                                  .enableDhuhr.isTrue) {
-                                                cancelScheduleNotification(
-                                                  prayerTimeNotifC
-                                                      .dhuhrId.value,
-                                                  "dhuhr",
-                                                ).then((_) {
-                                                  // Change notif icon
-                                                  prayerTimeNotifC
-                                                          .enableDhuhr.value =
-                                                      !prayerTimeNotifC
-                                                          .enableDhuhr.value;
+                                            break;
+                                          case 2:
+                                            if (prayerTimeNotifC
+                                                .enableDhuhr.isTrue) {
+                                              cancelScheduleNotification(
+                                                prayerTimeNotifC.dhuhrId.value,
+                                                "dhuhr",
+                                              ).then((_) {
+                                                // Change notif icon
+                                                prayerTimeNotifC
+                                                        .enableDhuhr.value =
+                                                    !prayerTimeNotifC
+                                                        .enableDhuhr.value;
 
-                                                  prayerTimeNotifC.writeBox(
-                                                    key: 'dhuhr_notif',
-                                                    value: prayerTimeNotifC
-                                                        .enableDhuhr.value
-                                                        .toString(),
-                                                  );
-                                                });
-                                              } else {
-                                                showSetPrayerTime(
-                                                  prayerTime: prayerTimes[2]!,
-                                                  prayerName: prayerNames[2],
+                                                prayerTimeNotifC.writeBox(
+                                                  key: 'dhuhr_notif',
+                                                  value: prayerTimeNotifC
+                                                      .enableDhuhr.value
+                                                      .toString(),
                                                 );
-                                              }
+                                              });
+                                            } else {
+                                              showSetPrayerTime(
+                                                prayerTime: prayerTimes[2]!,
+                                                prayerName: prayerNames[2],
+                                              );
+                                            }
 
-                                              break;
-                                            case 3:
-                                              if (prayerTimeNotifC
-                                                  .enableAsr.isTrue) {
-                                                cancelScheduleNotification(
-                                                  prayerTimeNotifC.asrId.value,
-                                                  "asr",
-                                                ).then((_) {
-                                                  // Change notif icon
-                                                  prayerTimeNotifC
-                                                          .enableAsr.value =
-                                                      !prayerTimeNotifC
-                                                          .enableAsr.value;
+                                            break;
+                                          case 3:
+                                            if (prayerTimeNotifC
+                                                .enableAsr.isTrue) {
+                                              cancelScheduleNotification(
+                                                prayerTimeNotifC.asrId.value,
+                                                "asr",
+                                              ).then((_) {
+                                                // Change notif icon
+                                                prayerTimeNotifC
+                                                        .enableAsr.value =
+                                                    !prayerTimeNotifC
+                                                        .enableAsr.value;
 
-                                                  prayerTimeNotifC.writeBox(
-                                                    key: 'asr_notif',
-                                                    value: prayerTimeNotifC
-                                                        .enableAsr.value
-                                                        .toString(),
-                                                  );
-                                                });
-                                              } else {
-                                                showSetPrayerTime(
-                                                  prayerTime: prayerTimes[3]!,
-                                                  prayerName: prayerNames[3],
+                                                prayerTimeNotifC.writeBox(
+                                                  key: 'asr_notif',
+                                                  value: prayerTimeNotifC
+                                                      .enableAsr.value
+                                                      .toString(),
                                                 );
-                                              }
+                                              });
+                                            } else {
+                                              showSetPrayerTime(
+                                                prayerTime: prayerTimes[3]!,
+                                                prayerName: prayerNames[3],
+                                              );
+                                            }
 
-                                              break;
-                                            case 4:
-                                              if (prayerTimeNotifC
-                                                  .enableMaghrib.isTrue) {
-                                                cancelScheduleNotification(
-                                                  prayerTimeNotifC
-                                                      .maghribId.value,
-                                                  "maghrib",
-                                                ).then((_) {
-                                                  // Change notif icon
-                                                  prayerTimeNotifC
-                                                          .enableMaghrib.value =
-                                                      !prayerTimeNotifC
-                                                          .enableMaghrib.value;
+                                            break;
+                                          case 4:
+                                            if (prayerTimeNotifC
+                                                .enableMaghrib.isTrue) {
+                                              cancelScheduleNotification(
+                                                prayerTimeNotifC
+                                                    .maghribId.value,
+                                                "maghrib",
+                                              ).then((_) {
+                                                // Change notif icon
+                                                prayerTimeNotifC
+                                                        .enableMaghrib.value =
+                                                    !prayerTimeNotifC
+                                                        .enableMaghrib.value;
 
-                                                  prayerTimeNotifC.writeBox(
-                                                    key: 'maghrib_notif',
-                                                    value: prayerTimeNotifC
-                                                        .enableMaghrib.value
-                                                        .toString(),
-                                                  );
-                                                });
-                                              } else {
-                                                showSetPrayerTime(
-                                                  prayerTime: prayerTimes[4]!,
-                                                  prayerName: prayerNames[4],
+                                                prayerTimeNotifC.writeBox(
+                                                  key: 'maghrib_notif',
+                                                  value: prayerTimeNotifC
+                                                      .enableMaghrib.value
+                                                      .toString(),
                                                 );
-                                              }
+                                              });
+                                            } else {
+                                              showSetPrayerTime(
+                                                prayerTime: prayerTimes[4]!,
+                                                prayerName: prayerNames[4],
+                                              );
+                                            }
 
-                                              break;
-                                            case 5:
-                                              if (prayerTimeNotifC
-                                                  .enableIsha.isTrue) {
-                                                cancelScheduleNotification(
-                                                  prayerTimeNotifC.ishaId.value,
-                                                  "isha",
-                                                ).then((_) {
-                                                  // Change notif icon
-                                                  prayerTimeNotifC
-                                                          .enableIsha.value =
-                                                      !prayerTimeNotifC
-                                                          .enableIsha.value;
+                                            break;
+                                          case 5:
+                                            if (prayerTimeNotifC
+                                                .enableIsha.isTrue) {
+                                              cancelScheduleNotification(
+                                                prayerTimeNotifC.ishaId.value,
+                                                "isha",
+                                              ).then((_) {
+                                                // Change notif icon
+                                                prayerTimeNotifC
+                                                        .enableIsha.value =
+                                                    !prayerTimeNotifC
+                                                        .enableIsha.value;
 
-                                                  prayerTimeNotifC.writeBox(
-                                                    key: 'isha_notif',
-                                                    value: prayerTimeNotifC
-                                                        .enableIsha.value
-                                                        .toString(),
-                                                  );
-                                                });
-                                              } else {
-                                                showSetPrayerTime(
-                                                  prayerTime: prayerTimes[5]!,
-                                                  prayerName: prayerNames[5],
+                                                prayerTimeNotifC.writeBox(
+                                                  key: 'isha_notif',
+                                                  value: prayerTimeNotifC
+                                                      .enableIsha.value
+                                                      .toString(),
                                                 );
-                                              }
+                                              });
+                                            } else {
+                                              showSetPrayerTime(
+                                                prayerTime: prayerTimes[5]!,
+                                                prayerName: prayerNames[5],
+                                              );
+                                            }
 
-                                              break;
-                                            case 6:
-                                              if (prayerTimeNotifC
-                                                  .enableQiyam.isTrue) {
-                                                cancelScheduleNotification(
-                                                  prayerTimeNotifC
-                                                      .qiyamId.value,
-                                                  "qiyam",
-                                                ).then((_) {
-                                                  // Change notif icon
-                                                  prayerTimeNotifC
-                                                          .enableQiyam.value =
-                                                      !prayerTimeNotifC
-                                                          .enableQiyam.value;
+                                            break;
+                                          case 6:
+                                            if (prayerTimeNotifC
+                                                .enableQiyam.isTrue) {
+                                              cancelScheduleNotification(
+                                                prayerTimeNotifC.qiyamId.value,
+                                                "qiyam",
+                                              ).then((_) {
+                                                // Change notif icon
+                                                prayerTimeNotifC
+                                                        .enableQiyam.value =
+                                                    !prayerTimeNotifC
+                                                        .enableQiyam.value;
 
-                                                  prayerTimeNotifC.writeBox(
-                                                    key: 'qiyam_notif',
-                                                    value: prayerTimeNotifC
-                                                        .enableQiyam.value
-                                                        .toString(),
-                                                  );
-                                                });
-                                              } else {
-                                                showSetPrayerTime(
-                                                  prayerTime: prayerTimes[6]!,
-                                                  prayerName: prayerNames[6],
+                                                prayerTimeNotifC.writeBox(
+                                                  key: 'qiyam_notif',
+                                                  value: prayerTimeNotifC
+                                                      .enableQiyam.value
+                                                      .toString(),
                                                 );
-                                              }
+                                              });
+                                            } else {
+                                              showSetPrayerTime(
+                                                prayerTime: prayerTimes[6]!,
+                                                prayerName: prayerNames[6],
+                                              );
+                                            }
 
-                                              break;
-                                            default:
-                                          }
-                                        },
-                                        icon: Icon(
-                                          enableNotif[i]
-                                              ? Icons
-                                                  .notifications_active_outlined
-                                              : Icons
-                                                  .notifications_off_outlined,
-                                          color: enableNotif[i]
-                                              ? null
-                                              : Colors.grey,
-                                        ),
-                                      )
-                                    ],
-                                  );
-                                },
-                                separatorBuilder: (context, i) {
-                                  return const Divider();
-                                },
-                                itemCount: prayerTimes.length,
-                              ),
+                                            break;
+                                          default:
+                                        }
+                                      },
+                                      icon: Icon(
+                                        enableNotif[i]
+                                            ? Icons
+                                                .notifications_active_outlined
+                                            : Icons.notifications_off_outlined,
+                                        color:
+                                            enableNotif[i] ? null : Colors.grey,
+                                      ),
+                                    )
+                                  ],
+                                );
+                              },
+                              separatorBuilder: (context, i) {
+                                return const Divider();
+                              },
+                              itemCount: prayerTimes.length,
                             ),
                           ),
-                        );
-                      }),
-                    ],
-                  ),
-                );
-        }),
-      ),
+                        ),
+                      );
+                    }),
+                  ],
+                ),
+              );
+      }),
     );
   }
 
@@ -550,8 +537,7 @@ class PrayerTimePage extends StatelessWidget {
       Get.back();
     } else {
       Get.back();
-      Get.snackbar("Opps...",
-          "Set prayer times reminder to activate reminder notification.");
+      Get.snackbar("Hata...", "Hatırlatıcı seçmediniz..");
     }
   }
 

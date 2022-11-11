@@ -20,7 +20,7 @@ class ArticleRepository {
 
       return rssFeed;
     } catch (e) {
-      log("Error: " + e.toString());
+      log("Hata: " + e.toString());
       return null;
     }
   }

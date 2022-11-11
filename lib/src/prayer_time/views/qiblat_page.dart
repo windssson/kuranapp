@@ -21,7 +21,7 @@ class QiblatPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Qiblah",
+          "Kıble",
           style: AppTextStyle.bigTitle,
         ),
         centerTitle: true,
@@ -167,7 +167,7 @@ class QiblatPage extends StatelessWidget {
                     },
                   )
                 : const Center(
-                    child: Text("This platform is not supported"),
+                    child: Text("Desteklenmeyen cihaz !"),
                   ),
       ),
       // }),

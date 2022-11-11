@@ -206,16 +206,7 @@ class UploadAvatarPage extends StatelessWidget {
                   userController.takePhoto();
                 },
               ),
-              const SizedBox(height: 10),
-              MyButton(
-                width: size.width,
-                text: "Create avatar",
-                onPressed: () {
-                  userController.createAvatar().then((value) => Get.bottomSheet(
-                        PasteAvatarUrl(),
-                      ));
-                },
-              ),
+
               // const Spacer(),
               const SizedBox(height: 40),
 
@@ -226,7 +217,7 @@ class UploadAvatarPage extends StatelessWidget {
                           userController.user.avatarUrl != null ||
                           userController.fileImage.value.path != "" ||
                           userController.copiedText.isNotEmpty)
-                      ? "Continue"
+                      ? "Devam Et"
                       : "Skip",
                   onPressed: () {
                     // userController.uploadPhoto();

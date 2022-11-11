@@ -42,4 +42,29 @@ class GlobalState extends GetxController {
     passwordError("");
     return null;
   }
+
+  String gunCevir(String gun) {
+    String veri = 'yok';
+    switch (gun) {
+      case 'fajr':
+        veri = 'Sabah';
+        break;
+      case 'sunrise':
+        veri = 'Güneş';
+        break;
+      case 'dhuhr':
+        veri = 'Öğle';
+        break;
+      case 'asr':
+        veri = 'İkindi';
+        break;
+      case 'maghrib':
+        veri = 'Akşam';
+        break;
+      case 'isha':
+        veri = 'Yatsı';
+        break;
+    }
+    return veri;
+  }
 }

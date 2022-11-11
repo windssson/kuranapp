@@ -31,7 +31,7 @@ class ForbiddenCard extends StatelessWidget {
             ),
             const SizedBox(height: 50),
             Text(
-              "Opps ...",
+              "Hata ...",
               style: AppTextStyle.bigTitle.copyWith(
                 color: ColorPalletes.bgDarkColor,
               ),

@@ -48,7 +48,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Profile",
+          "Profil",
           style: AppTextStyle.bigTitle,
         ),
         centerTitle: true,
@@ -64,7 +64,7 @@ class ProfilePage extends StatelessWidget {
                 return Container(
                   color: primaryColor,
                   width: size.width,
-                  height: size.height * 0.5,
+                  height: size.height * 0.3,
                   child: Hero(
                     tag: "avatar",
                     child: ModelViewer(
@@ -81,7 +81,7 @@ class ProfilePage extends StatelessWidget {
                 return Container(
                   color: primaryColor,
                   width: size.width,
-                  height: size.height * 0.5,
+                  height: size.height * 0.3,
                   padding: const EdgeInsets.only(bottom: 90),
                   child: Hero(
                     tag: "avatar",
@@ -100,7 +100,7 @@ class ProfilePage extends StatelessWidget {
                   color: _settingController.isDarkMode.value
                       ? Theme.of(context).cardColor
                       : primaryColor,
-                  height: size.height * 0.5,
+                  height: size.height * 0.4,
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Hero(
@@ -128,9 +128,9 @@ class ProfilePage extends StatelessWidget {
               }
             }),
             DraggableScrollableSheet(
-              initialChildSize: 0.6,
-              maxChildSize: 0.65,
-              minChildSize: 0.5,
+              initialChildSize: 0.7,
+              maxChildSize: 0.75,
+              minChildSize: 0.7,
               snap: true,
               builder: (context, controller) {
                 return Container(
@@ -152,7 +152,7 @@ class ProfilePage extends StatelessWidget {
                       const SizedBox(height: 40),
                       Obx(
                         () => Text(
-                          _userController.user.name ?? "Hamba Allah",
+                          _userController.user.name ?? "Misafir",
                           style: AppTextStyle.title.copyWith(fontSize: 18),
                           textAlign: TextAlign.center,
                         ),
@@ -160,7 +160,8 @@ class ProfilePage extends StatelessWidget {
                       const SizedBox(height: 8),
                       Obx(
                         () => Text(
-                          _userController.user.email ?? "hambaallah@gmail.com",
+                          _userController.user.email ??
+                              "Daha fazla özellik için",
                           style: AppTextStyle.normal.copyWith(
                             color: Colors.grey,
                           ),
@@ -170,10 +171,12 @@ class ProfilePage extends StatelessWidget {
                       const SizedBox(height: 20),
                       Obx(
                         () => Text(
-                          _userController.user.bio ?? "Better than yesterday",
+                          _userController.user.bio ?? "Hemen üye olun !",
                           style: AppTextStyle.small.copyWith(
-                            color: Colors.grey,
-                          ),
+                              color: Colors.grey,
+                              fontSize: _userController.user.email == null
+                                  ? 20.0
+                                  : 13.0),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -181,7 +184,7 @@ class ProfilePage extends StatelessWidget {
                       if (_userController.user.email != null)
                         ProfileItem(
                           icon: UniconsLine.edit_alt,
-                          title: "Edit Profile",
+                          title: "Profili Düzenle",
                           onPressed: () {
                             Get.bottomSheet(const ComingSoonCard());
                           },
@@ -189,7 +192,7 @@ class ProfilePage extends StatelessWidget {
                       const SizedBox(height: 16),
                       ProfileItem(
                         icon: UniconsLine.share_alt,
-                        title: "Share hiQuran",
+                        title: "Paylaş",
                         onPressed: () {
                           Share.share(
                             "Aplikasi Quran yang luar biasa dengan desain yang indah, mudah digunakan dan banyak fitur. \n🚀 Install hiQuran dengan klik link berikut, \nhttps://s.id/hiQuran",
@@ -200,7 +203,7 @@ class ProfilePage extends StatelessWidget {
                       const SizedBox(height: 16),
                       ProfileItem(
                         icon: UniconsLine.feedback,
-                        title: "Give Feedback",
+                        title: "Değerlendir",
                         onPressed: () {
                           Wiredash.of(context)?.show();
                         },
@@ -208,7 +211,7 @@ class ProfilePage extends StatelessWidget {
                       const SizedBox(height: 16),
                       ProfileItem(
                         icon: UniconsLine.setting,
-                        title: "Settings",
+                        title: "Ayarlar",
                         onPressed: () {
                           Get.to(() => const SettingsPage());
                         },
@@ -217,12 +220,12 @@ class ProfilePage extends StatelessWidget {
                       if (_userController.user.email == null)
                         MyButton(
                           width: MediaQuery.of(context).size.width,
-                          text: "Sign In",
+                          text: "Giriş Yap",
                           onPressed: () => Get.to(SignInPage()),
                         )
                       else
                         MyOutlinedButton(
-                          text: "Sign Out",
+                          text: "Çıkış Yap",
                           isLoading: _state.isLoading.value,
                           onPressed: () {
                             _state.isLoading(true);
@@ -276,14 +279,14 @@ class ProfileItem extends StatelessWidget {
         radius: 15,
         color: settingController.isDarkMode.value
             ? Theme.of(context).cardColor
-            : Theme.of(context).scaffoldBackgroundColor.withOpacity(0.5),
+            : Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withOpacity(0.1),
+                color: Theme.of(context).primaryColor.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Icon(

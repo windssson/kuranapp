@@ -67,13 +67,13 @@ class AppPermissionStatus extends StatelessWidget {
           // const Spacer(),
           const SizedBox(height: 20),
           MyButton(
-            text: "Allow",
+            text: "izin ver",
             width: MediaQuery.of(context).size.width,
             onPressed: onPressed,
           ),
           const SizedBox(height: 10),
           MyOutlinedButton(
-            text: "Don't Allow",
+            text: "izin verme",
             width: MediaQuery.of(context).size.width,
             onPressed: () {
               Get.back();

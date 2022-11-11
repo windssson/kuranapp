@@ -30,7 +30,7 @@ class ThemePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "App Themes",
+          "Tema Rengi",
           style: AppTextStyle.bigTitle,
         ),
         centerTitle: true,

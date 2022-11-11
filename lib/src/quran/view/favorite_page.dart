@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -24,6 +26,7 @@ class FavoritePage extends StatelessWidget {
     final userC = Get.put(UserControllerImpl());
 
     if (userC.user.id != null) {
+      log(userC.user.id.toString());
       if (surahC.surahFavorites.isEmpty) {
         surahC.fetchSurahFavorites(userC.user.id!);
       }
@@ -32,7 +35,7 @@ class FavoritePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Favorite",
+          "Kaydettiklerin",
           style: AppTextStyle.bigTitle,
         ),
         actions: [
@@ -43,7 +46,7 @@ class FavoritePage extends StatelessWidget {
                     onPressed: () {
                       Get.dialog(ConfirmDeleteFavorite(
                         message:
-                            "Are you sure you want \nto remove all from favorite?",
+                            "Kaydettiğin bütün sureleri \n silmek istiyor musun?",
                         onCancel: () => Get.back(),
                         onDelete: () {
                           surahC.removeAllFromFavorite(userC.user.id!);
@@ -115,7 +118,7 @@ class FavoritePage extends StatelessWidget {
                             ),
                             const SizedBox(height: 40),
                             Text(
-                              "No Favorite",
+                              "Kaydettiğin sure yok.",
                               style: AppTextStyle.bigTitle,
                             ),
                             const SizedBox(height: 10),
@@ -163,7 +166,7 @@ class FavoritePage extends StatelessWidget {
                                             onPressed: (context) {
                                               Get.dialog(ConfirmDeleteFavorite(
                                                 message:
-                                                    "Are you sure you want to \nremove Surah \"${surahC.surahFavorites.toList()[i].name}\" \nfrom favorite?",
+                                                    "\"${surahC.surahFavorites.toList()[i].name}\" suresini \n kaydettiklerinden silmek \n istiyor musun?",
                                                 onCancel: () => Get.back(),
                                                 onDelete: () {
                                                   surahC
@@ -196,7 +199,7 @@ class FavoritePage extends StatelessWidget {
                                             onPressed: (context) {
                                               Get.dialog(ConfirmDeleteFavorite(
                                                 message:
-                                                    "Are you sure you want to \nremove Surah \"${surahC.surahFavorites.toList()[i].name}\" \nfrom favorite?",
+                                                    "\"${surahC.surahFavorites.toList()[i].name}\" suresini \n kaydettiklerinden silmek \n istiyor musun?",
                                                 onCancel: () => Get.back(),
                                                 onDelete: () {
                                                   surahC
@@ -240,9 +243,7 @@ class FavoritePage extends StatelessWidget {
                                               .number,
                                           nameShort: surahC.surahFavorites
                                               .toList()[i]
-                                              .name,
-                                              
-                                          
+                                              .namearab,
                                           nameTransliteration: surahC
                                               .surahFavorites
                                               .toList()[i]

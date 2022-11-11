@@ -24,17 +24,17 @@ class SelectTime extends StatelessWidget {
         boxShadow: [AppShadow.card],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Set Prayer \nTime Reminder",
+            "Namaz Vakti için\nHatırlatıcı Ekle",
             style: AppTextStyle.title.copyWith(
               fontSize: 20,
             ),
           ),
           const SizedBox(height: 10),
           Text(
-            "Reminder notification will appear.",
+            "Hatırlatma bildirimi gelecek.",
             style: AppTextStyle.normal.copyWith(
               color: Colors.grey,
               letterSpacing: 0.5,
@@ -44,11 +44,11 @@ class SelectTime extends StatelessWidget {
           GroupButton(
             controller: controller,
             buttons: const [
-              'On Time',
-              "-5 Minute",
-              "-10 Minute",
-              "-15 Minute",
-              "-20 Minute"
+              'Vaktinde',
+              "5 dk Önce",
+              "10 dk Önce",
+              "15 dk Önce",
+              "20 dk Önce",
             ],
             maxSelected: 1,
             onSelected: onSelected,
@@ -67,7 +67,7 @@ class SelectTime extends StatelessWidget {
           ),
           const Spacer(),
           MyButton(
-            text: "Okay, Perfect!",
+            text: "Hatırlatıcı Ekle!",
             width: MediaQuery.of(context).size.width,
             onPressed: onPressed,
           ),

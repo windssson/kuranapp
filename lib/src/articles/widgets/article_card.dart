@@ -95,7 +95,7 @@ class ArticleCard extends StatelessWidget {
                           boxShadow: [AppShadow.card],
                         ),
                         child: Text(
-                          "New",
+                          "Yeni",
                           style: AppTextStyle.normal.copyWith(
                             color: Theme.of(context).primaryColor,
                           ),

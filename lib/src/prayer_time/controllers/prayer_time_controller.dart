@@ -21,12 +21,11 @@ class _CurrentLocation {
   _CurrentLocation({this.latitude = 0, this.longitude = 0});
 }
 
-const String _kLocationServicesDisabledMessage =
-    'Location services are disabled.';
-const String _kPermissionDeniedMessage = 'Permission denied.';
+const String _kLocationServicesDisabledMessage = 'Konum servisi kapalı';
+const String _kPermissionDeniedMessage = 'Konum erişimi yetkisi yok.';
 const String _kPermissionDeniedForeverMessage =
-    "Please, enable this app's location permission in settings to use this feature.";
-const String _kPermissionGrantedMessage = 'Permission granted.';
+    "Lütfen konumunuzu açın ve ayarlardan konum erişimi verin.";
+const String _kPermissionGrantedMessage = 'Konuma erişilemiyor';
 
 abstract class PrayerTimeController extends GetxController {
   Future<LocationResultFormatter> handleLocationPermission();
@@ -82,9 +81,9 @@ class PrayerTimeControllerImpl extends PrayerTimeController {
   Future<bool> openAppSetting() async {
     final opened = await Geolocator.openAppSettings();
     if (opened) {
-      log("Opened location setting");
+      log("Konum servisini açınız");
     } else {
-      log("Error opening location setting");
+      log("Konum servisine erişilemedi.");
     }
 
     return opened;
@@ -100,13 +99,13 @@ class PrayerTimeControllerImpl extends PrayerTimeController {
       Get.bottomSheet(
         AppPermissionStatus(
           icon: UniconsLine.map_marker_slash,
-          title: "Allow Access Location",
+          title: "Konum erişimine izin verin",
           message: handlePermission.error.toString(),
           onPressed: () {
             final prayerC = Get.find<PrayerTimeControllerImpl>();
             prayerC.openAppSetting().then((value) {
               if (!value) {
-                Get.snackbar("Opps", "Cannot open setting");
+                Get.snackbar("Eyvah", "Ayarlar açılamıyor");
               }
             });
           },
@@ -137,21 +136,12 @@ class PrayerTimeControllerImpl extends PrayerTimeController {
 
     final myCoordinates = Coordinates(latitude, longitude);
 
-    final params = CalculationMethod.singapore.getParameters();
+    final params = CalculationMethod.turkey.getParameters();
     params.madhab = Madhab.shafi;
     final prayerTimes = PrayerTimes.today(myCoordinates, params);
     final sunnahTimes = SunnahTimes(prayerTimes);
 
-    log("---Today's Prayer Times in Your Local Timezone(${prayerTimes.fajr.timeZoneName})---");
-
-    log(prayerTimes.fajr.toString());
-    log(prayerTimes.sunrise.toString());
-    log(prayerTimes.dhuhr.toString());
-    log(prayerTimes.asr.toString());
-    log(prayerTimes.maghrib.toString());
-    log(prayerTimes.isha.toString());
-    log(sunnahTimes.middleOfTheNight.toString());
-    log(sunnahTimes.lastThirdOfTheNight.toString());
+    log("Konum erişimi başarılı - (${prayerTimes.fajr.timeZoneName})---");
 
     var result = PrayerTime(
       shubuh: prayerTimes.fajr,
@@ -165,10 +155,10 @@ class PrayerTimeControllerImpl extends PrayerTimeController {
     );
 
     currentPrayer(prayerTimes.currentPrayer());
-    log("Current prayer: ${prayerTimes.currentPrayer()}");
+    log("Geçerli vakit: ${prayerTimes.currentPrayer()}");
 
     nextPrayer(prayerTimes.nextPrayer());
-    log("Next prayer: ${prayerTimes.nextPrayer()}");
+    log("Sıradaki vakit: ${prayerTimes.nextPrayer()}");
 
     prayerTimesToday(result);
     prayerTimesToday.value = result;
@@ -199,8 +189,7 @@ class PrayerTimeControllerImpl extends PrayerTimeController {
         log("$address");
         currentAddress(address);
       } catch (e) {
-        Get.snackbar(
-            "Opps", 'Address was not retrieved, please fill out manually');
+        Get.snackbar("Eyvah", 'Adres alınamadı.');
       }
     }
   }
@@ -211,7 +200,7 @@ class PrayerTimeControllerImpl extends PrayerTimeController {
     final myCoordinates = Coordinates(latitude, longitude);
 
     final qiblah = Qibla(myCoordinates);
-    log("Qiblah: ${qiblah.direction}");
+    log("Kıble: ${qiblah.direction}");
     qiblahDirection.value = qiblah.direction;
   }
 
@@ -221,7 +210,7 @@ class PrayerTimeControllerImpl extends PrayerTimeController {
         sensorIsSupported.value = value;
         isQiblahLoaded.value = true;
       }
-      log("Check $value");
+      log("Kontrol $value");
     });
   }
 

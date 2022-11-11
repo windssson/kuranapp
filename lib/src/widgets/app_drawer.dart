@@ -68,7 +68,7 @@ class AppDrawer extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 10),
                           child: FittedBox(
                             child: Text(
-                              "hiQuran",
+                              "KuranApp",
                               style: AppTextStyle.title,
                             ),
                           ),

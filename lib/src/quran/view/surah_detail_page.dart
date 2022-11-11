@@ -10,7 +10,6 @@ import 'package:quran_app/src/profile/views/signin_page.dart';
 import 'package:quran_app/src/quran/controller/surah_controller.dart';
 import 'package:quran_app/src/quran/model/surah.dart';
 import 'package:quran_app/src/quran/model/verse.dart';
-import 'package:quran_app/src/quran/view/favorite_page.dart';
 import 'package:quran_app/src/quran/widget/shimmer/surah_detail_page_shimmer.dart';
 import 'package:quran_app/src/quran/widget/surah_card.dart';
 import 'package:quran_app/src/quran/widget/tafsir_view.dart';
@@ -69,13 +68,16 @@ class SurahDetailPage extends StatelessWidget {
             ),
             isLiked: controller.isFavorite(surah),
             onTap: (isLiked) async {
+              log(userC.user.id.toString());
+              log(surah.toString());
               if (userC.user.id != null) {
                 if (controller.isFavorite(surah)) {
-                  final result =
-                      await controller.removeFromFavorite(106, surah);
+                  final result = await controller.removeFromFavorite(
+                      userC.user.id!, surah);
                   return !result;
                 } else {
-                  final result = await controller.addToFavorite(106, surah);
+                  final result =
+                      await controller.addToFavorite(userC.user.id!, surah);
                   return result;
                 }
               } else {
@@ -113,9 +115,10 @@ class SurahDetailPage extends StatelessWidget {
                         SurahCard(
                           number: surah.number,
                           nameShort: "${surah.name}",
-                          nameTranslation: "Yusuf",
-                          nameTransliteration: "Yusuf",
+                          nameTranslation: "${surah.name}",
+                          nameTransliteration: "${surah.namearab}",
                           numberOfVerses: surah.numberOfVerses,
+                          audiourl: surah.audiourl,
                         ),
                         // const SizedBox(height: 10),
                         if (!snapshot.hasData) const SurahDetailPageShimmer(),
@@ -157,6 +160,7 @@ class SurahDetailPage extends StatelessWidget {
       numberInSurah: verse.number!.inSurah,
       closeShow: () {
         controller.showTafsir.value = false;
+        log('Kapandı');
       },
     );
   }

@@ -17,9 +17,7 @@ class _TafsirViewState extends State<TafsirView> {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: 0.55,
-      maxChildSize: 0.9,
-      minChildSize: 0.25,
+      initialChildSize: 0.25,
       snap: true,
       builder: (context, scrollController) {
         return Container(

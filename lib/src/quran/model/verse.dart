@@ -1,21 +1,15 @@
 class Verse {
-  Verse({
-    this.number,
-    this.text,
-    this.translation,
-   
-  });
+  Verse({this.number, this.text, this.translation});
 
   Number? number;
   TextVerse? text;
   Translation? translation;
-  
 
   factory Verse.fromJson(Map<String, dynamic> json) => Verse(
-        number: Number(inSurah: json["verse_number"],inQuran: json["id"]),     
-        text: TextVerse(arab: json['verse'],transliteration: 'Veri Geldii'),
-        translation: Translation.fromJson(json["translation"]),
-      );
+      number: Number(inSurah: json["verse_number"], inQuran: json["id"]),
+      text: TextVerse(
+          arab: json['verse'], transliteration: json["transcription"]),
+      translation: Translation.fromJson(json["translation"]));
 }
 
 class Number {
@@ -28,8 +22,6 @@ class Number {
   int? inSurah;
 }
 
-
-
 class TextVerse {
   TextVerse({
     this.arab,
@@ -40,21 +32,14 @@ class TextVerse {
   String? transliteration;
 }
 
-
-
-
-
-
 class Translation {
   Translation({
-   
     this.id,
   });
-  
+
   String? id;
 
   factory Translation.fromJson(Map<String, dynamic> json) => Translation(
-        
         id: json["text"],
       );
 }

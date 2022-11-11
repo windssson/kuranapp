@@ -1,13 +1,17 @@
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:quran_app/src/quran/widget/surah_player.dart';
 import 'package:quran_app/src/settings/theme/app_theme.dart';
 
-class SurahCard extends StatelessWidget {
+class SurahCard extends StatefulWidget {
   const SurahCard({
     Key? key,
     this.number,
     this.nameTransliteration,
     this.nameShort,
     this.numberOfVerses,
+    this.audiourl,
     this.nameTranslation,
   }) : super(key: key);
   final int? number;
@@ -15,6 +19,16 @@ class SurahCard extends StatelessWidget {
   final String? nameTranslation;
   final String? nameShort;
   final int? numberOfVerses;
+  final String? audiourl;
+
+  @override
+  State<SurahCard> createState() => _SurahCardState();
+}
+
+class _SurahCardState extends State<SurahCard> {
+  AudioCache audioCache = AudioCache();
+  AudioPlayer advancedPlayer = AudioPlayer();
+  bool playerstate = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +56,7 @@ class SurahCard extends StatelessWidget {
             child: Center(
               child: FittedBox(
                 child: Text(
-                  "$number",
+                  "${widget.number}",
                   style: AppTextStyle.normal.copyWith(
                     color: Theme.of(context).iconTheme.color,
                   ),
@@ -52,30 +66,24 @@ class SurahCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            "$nameTransliteration",
+            "${widget.nameTransliteration}",
             style: AppTextStyle.title.copyWith(fontSize: 20),
           ),
           const SizedBox(height: 4),
           Text(
-            "$nameTranslation",
+            "${widget.nameTranslation}",
             style: AppTextStyle.normal.copyWith(fontSize: 14),
           ),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Chip(
-                backgroundColor: Theme.of(context).cardColor,
-                label: Text(
-                  "Devran",
-                  style: AppTextStyle.small,
-                ),
-              ),
+              SurahOynat(url: widget.audiourl,),
               const SizedBox(width: 8),
               Chip(
                 backgroundColor: Theme.of(context).cardColor,
                 label: Text(
-                  "$numberOfVerses Ayet",
+                  "${widget.numberOfVerses} Ayet",
                   style: AppTextStyle.small,
                 ),
               ),
@@ -86,3 +94,4 @@ class SurahCard extends StatelessWidget {
     );
   }
 }
+
