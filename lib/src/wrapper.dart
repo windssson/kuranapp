@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:quran_app/src/app.dart';
 import 'package:quran_app/src/profile/controllers/auth_controller.dart';
 import 'package:quran_app/src/profile/controllers/user_controller.dart';
+import 'package:quran_app/src/profile/views/signin_page.dart';
 import 'package:quran_app/src/settings/controller/settings_controller.dart';
 import 'package:quran_app/src/settings/theme/app_theme.dart';
 
@@ -40,15 +41,9 @@ class Wrapper extends StatelessWidget {
       await box.write('user', res?.persistSessionString);
       userC.loadUser(res?.user.email).then((value) {
         log(value.user.toString());
-        log(value.error.toString());
-
-        // if (value.user == null && value.error == "Email not registered") {
-        //   Get.off(SignUpPage());
-        // } else {
-        // Get.off(SurahPage());
         Get.off(() => const MainPage());
-
-        // }
+      }).onError((error, stackTrace){
+        Get.off(() => SignInPage());
       });
     }
   }

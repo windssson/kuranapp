@@ -94,7 +94,13 @@ class AuthControllerImpl extends AuthController {
 
   @override
   Future<Session?> recoverSession(String session) async {
-    final res = await _supabase.auth.recoverSession(session);
+    final res = await _supabase.auth.recoverSession(session).then((value) {
+      return value;
+    }).onError((error, stackTrace) {
+      log("message");
+      return AuthResponse(session: null,user: null);
+    });
+
     if (res.session == null) {
       log("Recovery session hatası");
       return null;
@@ -143,7 +149,6 @@ class AuthControllerImpl extends AuthController {
       return UserResultFormatter(null, e.toString());
     }
   }
-
 
   @override
   Future<bool> signOut() async {

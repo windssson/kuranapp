@@ -8,7 +8,6 @@ import 'package:quran_app/bricks/my_widgets/my_circle_avatar.dart';
 import 'package:quran_app/bricks/my_widgets/my_outline_button.dart';
 import 'package:quran_app/src/profile/controllers/user_controller.dart';
 import 'package:quran_app/src/profile/views/confirm_account_page.dart';
-import 'package:quran_app/src/profile/widgets/paste_avatarurl.dart';
 import 'package:quran_app/src/settings/theme/app_theme.dart';
 import 'package:r_dotted_line_border/r_dotted_line_border.dart';
 import 'package:unicons/unicons.dart';
@@ -83,7 +82,7 @@ class UploadAvatarPage extends StatelessWidget {
                               userController.pickImage();
                             },
                             child: Text(
-                              "Change photo",
+                              "Fotoğraf değiştir",
                               style: AppTextStyle.small,
                             ),
                           ),
@@ -109,7 +108,7 @@ class UploadAvatarPage extends StatelessWidget {
                                 userController.pickImage();
                               },
                               child: Text(
-                                "Change photo",
+                                "Fotoğraf değiştir",
                                 style: AppTextStyle.small,
                               ),
                             )
@@ -128,7 +127,7 @@ class UploadAvatarPage extends StatelessWidget {
                             InkWell(
                               onTap: () => userController.pickImage(),
                               child: Text(
-                                "Change photo",
+                                "Fotoğraf değiştir",
                                 style: AppTextStyle.small,
                               ),
                             )
@@ -152,7 +151,7 @@ class UploadAvatarPage extends StatelessWidget {
                               userController.pickImage();
                             },
                             child: Text(
-                              "Change photo",
+                              "Fotoğraf değiştir",
                               style: AppTextStyle.small,
                             ),
                           )
@@ -185,7 +184,7 @@ class UploadAvatarPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                "Pick your photo",
+                                "Fotoğraf Yükle",
                                 style: AppTextStyle.small,
                               ),
                             ],
@@ -201,7 +200,7 @@ class UploadAvatarPage extends StatelessWidget {
 
               MyButton(
                 width: size.width,
-                text: "Take a photo",
+                text: "Fotoğraf Çek",
                 onPressed: () {
                   userController.takePhoto();
                 },
@@ -218,7 +217,7 @@ class UploadAvatarPage extends StatelessWidget {
                           userController.fileImage.value.path != "" ||
                           userController.copiedText.isNotEmpty)
                       ? "Devam Et"
-                      : "Skip",
+                      : "Geç",
                   onPressed: () {
                     // userController.uploadPhoto();
                     log("User State : ${userController.user}");

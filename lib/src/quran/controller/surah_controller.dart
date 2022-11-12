@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:quran_app/src/quran/model/surah.dart';
@@ -126,10 +125,12 @@ class SurahController extends GetxController {
 
   var isFavoriteLoaded = false.obs;
   var isFavoriteDeleted = false.obs;
+  var isRadioLoaded = true.obs;
 
   bool isFavorite(Surah surah) {
     return _surahFavorites.contains(surah);
   }
+
 
   Future<bool> addToFavorite(int userID, Surah surah) async {
     final surahRepo = SurahFavoriteRepositoryImpl();
@@ -216,6 +217,7 @@ class SurahController extends GetxController {
 
     isFavoriteLoaded.value = false;
   }
+
 
   @override
   void onInit() {

@@ -45,7 +45,7 @@ class ConfirmAccountPage extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "Confirm \nYour Account",
+                "Hesabınızı \nTamamlayın",
                 style: AppTextStyle.bigTitle.copyWith(
                   // fontSize: ,
                   color: settingController.isDarkMode.value
@@ -124,7 +124,7 @@ class ConfirmAccountPage extends StatelessWidget {
                 } else {
                   return Text(
                     userController.username.value == ""
-                        ? "Hamba Allah"
+                        ? "Misafir"
                         : userController.username.value,
                     style: AppTextStyle.title.copyWith(fontSize: 18),
                     textAlign: TextAlign.center,
@@ -144,7 +144,7 @@ class ConfirmAccountPage extends StatelessWidget {
               const Divider(),
               const SizedBox(height: 30),
               Text(
-                "create your username \nor keep anonymous",
+                "Lütfen adınızı yazınız. \n Nickname kullanabilirsiniz.",
                 style: AppTextStyle.normal.copyWith(
                   color: Colors.grey,
                 ),
@@ -163,14 +163,14 @@ class ConfirmAccountPage extends StatelessWidget {
                   userController.username.value = v;
                   userController.setUsername(v);
                   if (v.isEmpty) {
-                    userController.setUsername("Hamba Allah");
+                    userController.setUsername("Misafir");
                   }
                 },
               ),
               const SizedBox(height: 40),
               Obx(
                 () => MyButton(
-                  text: "Create My Account",
+                  text: "Hesap oluştur",
                   isLoading: _state.isLoading.value,
                   onPressed: () => completedCreateAccount(),
                 ),
@@ -189,19 +189,19 @@ class ConfirmAccountPage extends StatelessWidget {
       final res = await userController.uploadPhoto();
       if (!res) {
         _state.isLoading.value = false;
-        Get.snackbar("Opps...", "Failed to upload image");
+        Get.snackbar("Hata...", "Fotoğraf yüklemede hata");
       }
     }
 
     final result = await userController.updateUser();
     if (result.error != null) {
       _state.isLoading.value = false;
-      Get.snackbar("Opps...", "${result.error}");
+      Get.snackbar("Hata...", "${result.error}");
     } else {
       log("User State : ${userController.user}");
 
       _state.isLoading.value = false;
-      Get.snackbar("Woo hoo..", "Your successfully to create account");
+      Get.snackbar("Tebrikler..", "Hesabınız oluşturuldu.");
       // Get.offAll(SurahPage());
       Get.offAll(const MainPage());
 

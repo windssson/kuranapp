@@ -38,7 +38,7 @@ class ForbiddenCard extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              "Let's login first, then you can enjoy \nand explore this feature.",
+              "Bu özellikler ve daha fazlasını kullanabilmek için \n Hemen üye olun yada giriş yapın !",
               style: AppTextStyle.normal.copyWith(
                 color: Colors.grey,
               ),
@@ -46,7 +46,7 @@ class ForbiddenCard extends StatelessWidget {
             ),
             const SizedBox(height: 40),
             MyButton(
-              text: "Back",
+              text: "Geri",
               onPressed: () => Get.back(),
               // color: Colors.grey.shade100,
               color: Colors.grey.shade100,
@@ -57,7 +57,7 @@ class ForbiddenCard extends StatelessWidget {
             const SizedBox(height: 16),
             MyButton(
               width: MediaQuery.of(context).size.width * 0.75,
-              text: "Sign In",
+              text: "Giriş Yapın",
               onPressed: onPressed,
               color: Get.isDarkMode
                   ? Theme.of(context).backgroundColor

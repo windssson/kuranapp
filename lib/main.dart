@@ -45,7 +45,7 @@ void main() async {
     ],
   );
 
-  // firebase initialize
+  // firebase initializes
   await Firebase.initializeApp(
     name: 'kuranapp',
     options: DefaultFirebaseOptions.currentPlatform,
@@ -59,6 +59,7 @@ void main() async {
 
   // local storage initialize
   Get.put<GetStorage>(GetStorage());
+
 
   runApp(MyApp());
 }

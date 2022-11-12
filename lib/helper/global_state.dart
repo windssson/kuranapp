@@ -20,7 +20,7 @@ class GlobalState extends GetxController {
     }
 
     if (!GetUtils.isEmail(text)) {
-      emailError("Email kayıtlı değil");
+      emailError("Email adresi yanlış");
       return emailError.value;
     }
 

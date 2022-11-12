@@ -48,8 +48,8 @@ class SignInPage extends StatelessWidget {
                 style: AppTextStyle.bigTitle.copyWith(
                   fontSize: 28,
                   color: settingController.isDarkMode.value
-                      ? Colors.black
-                      : Colors.white,
+                      ? Theme.of(context).primaryColor
+                      : ColorPalletes.bgDarkColor,
                 ),
               ),
               const SizedBox(height: 10),

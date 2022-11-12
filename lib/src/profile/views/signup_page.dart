@@ -53,7 +53,7 @@ class SignUpPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                "Create your account and get \ninteresting insigh your activity \non this app",
+                "Hesabınızı oluşturun ve \n uygulama ile istediğiniz zaman \nistediğiniz yerden kuran okuyun.",
                 style: AppTextStyle.normal.copyWith(
                   fontSize: 14,
                   color: Colors.grey,
@@ -161,10 +161,10 @@ class SignUpPage extends StatelessWidget {
     final email = _state.validateEmail();
     final pass = _state.validatePassword();
     if (email != null) {
-      Get.snackbar("Opp... asdasd", email);
+      Get.snackbar("Hata...", email);
       _state.isSubmitted(false);
     } else if (pass != null) {
-      Get.snackbar("Opps.. asdasd.", pass);
+      Get.snackbar("Hata...", pass);
       _state.isSubmitted(false);
     } else {
       _state.isSubmitted(false);
@@ -174,7 +174,7 @@ class SignUpPage extends StatelessWidget {
         if (value.error != null) {
           _state.isLoading(false);
 
-          Get.snackbar("Opp...asdas", value.error.toString());
+          Get.snackbar("Opp...", value.error.toString());
         } else {
           userController.loadUser(value.user?.email).then((value) {
             _state.isLoading(false);
@@ -190,7 +190,7 @@ class SignUpPage extends StatelessWidget {
     UserResultFormatter googleUser = await authController.signInWithGoogle();
     if (googleUser.error != null) {
       _state.isLoadingGoogle(false);
-      Get.snackbar("Opps... dsfsdf", googleUser.error.toString());
+      Get.snackbar("Opps...", googleUser.error.toString());
     } else {
       _state.isLoadingGoogle(false);
       _state.passwordText("");

@@ -6,3 +6,4 @@ class SurahFavoriteFormatter extends ResultFormatter {
 
   final List<SurahFavorite>? surahFavorites;
 }
+

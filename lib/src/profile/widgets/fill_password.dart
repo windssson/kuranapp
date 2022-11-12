@@ -53,7 +53,7 @@ class FillPassword extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Text(
-            "Create your password to \nsecure your account",
+            "Hesabınızı güvene almak için \n şifre oluşturun.",
             style: AppTextStyle.normal.copyWith(
               fontSize: 14,
               color: Colors.grey,
@@ -64,7 +64,7 @@ class FillPassword extends StatelessWidget {
           Obx(
             () => InputText(
               textController: _textC,
-              hintText: "Fill your password",
+              hintText: "Şifrenizi yazın.",
               errorText: _state.passwordError.isNotEmpty
                   ? _state.passwordError.value
                   : null,
@@ -91,7 +91,7 @@ class FillPassword extends StatelessWidget {
           const SizedBox(height: 16),
           Obx(
             () => MyButton(
-              text: "Continue",
+              text: "Devam Et",
               width: MediaQuery.of(context).size.width,
               isLoading: _state.isLoadingGoogle.value,
               onPressed: _state.passwordText.value.isEmpty
@@ -129,8 +129,7 @@ class FillPassword extends StatelessWidget {
     if (newUser.error != null) {
       _state.isLoadingGoogle(false);
       Get.back();
-      Get.snackbar("Opps... asd", newUser.error.toString());
-      log('burada hata verdi');
+      Get.snackbar("Hata... ", newUser.error.toString());
     } else {
       _userController.loadUser(newUser.user?.email).then((value) {
         _state.isLoadingGoogle(false);

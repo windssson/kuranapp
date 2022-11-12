@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +11,7 @@ class SurahOynat extends StatefulWidget {
 class _SurahOynatState extends State<SurahOynat> {
   AudioPlayer advancedPlayer = AudioPlayer();
   bool caliyormu = false;
+  IconData ikon = Icons.play_arrow;
 
   @override
   void initState() {
@@ -20,6 +19,7 @@ class _SurahOynatState extends State<SurahOynat> {
     advancedPlayer.onPlayerComplete.listen((event) {
       setState(() {
         caliyormu = false;
+        ikon = Icons.play_arrow;
       });
     });
   }
@@ -38,22 +38,27 @@ class _SurahOynatState extends State<SurahOynat> {
       }),
       child: Chip(
         backgroundColor: Theme.of(context).cardColor,
-        label: Icon(caliyormu ? Icons.pause : Icons.play_arrow),
+        label: Icon(ikon),
       ),
     );
   }
 
   gelenLinkiCalistir(String? url) async {
     if (caliyormu == false) {
+      setState(() {
+        ikon = Icons.file_download;
+      });
       await advancedPlayer.setSourceUrl(url!);
       await advancedPlayer.resume();
       setState(() {
+        ikon = Icons.pause;
         caliyormu = true;
       });
     } else {
       advancedPlayer.pause();
       setState(() {
         caliyormu = false;
+        ikon = Icons.play_arrow;
       });
     }
   }

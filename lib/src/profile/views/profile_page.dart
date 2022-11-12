@@ -14,8 +14,8 @@ import 'package:quran_app/src/profile/views/signin_page.dart';
 import 'package:quran_app/src/settings/controller/settings_controller.dart';
 import 'package:quran_app/src/settings/settings_page.dart';
 import 'package:quran_app/src/settings/theme/app_theme.dart';
+import 'package:quran_app/src/settings/theme/edit_profil.dart';
 import 'package:quran_app/src/widgets/app_card.dart';
-import 'package:quran_app/src/widgets/coming_soon_card.dart';
 import 'package:quran_app/src/wrapper.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:unicons/unicons.dart';
@@ -186,7 +186,7 @@ class ProfilePage extends StatelessWidget {
                           icon: UniconsLine.edit_alt,
                           title: "Profili Düzenle",
                           onPressed: () {
-                            Get.bottomSheet(const ComingSoonCard());
+                            Get.to(() => const EditProfilPage());
                           },
                         ),
                       const SizedBox(height: 16),
@@ -195,8 +195,8 @@ class ProfilePage extends StatelessWidget {
                         title: "Paylaş",
                         onPressed: () {
                           Share.share(
-                            "Aplikasi Quran yang luar biasa dengan desain yang indah, mudah digunakan dan banyak fitur. \n🚀 Install hiQuran dengan klik link berikut, \nhttps://s.id/hiQuran",
-                            subject: "hiQuran App",
+                            "Kuran okumak ve dinlemek için harika bir uygulama. \n🚀 Sizde indirip her yerden ayetleri okuyup dinleyebilirsiniz, \nhttps://www.windssson.com",
+                            subject: "KuranApp",
                           );
                         },
                       ),
@@ -234,8 +234,8 @@ class ProfilePage extends StatelessWidget {
                               _state.isLoading(false);
 
                               Get.snackbar(
-                                "Waah",
-                                "You are logout",
+                                "Tebrikler",
+                                "Çıkış Yapıldı",
                                 duration: const Duration(seconds: 1),
                               );
                               Future.delayed(

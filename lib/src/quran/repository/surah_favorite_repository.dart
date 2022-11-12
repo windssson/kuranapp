@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:quran_app/src/quran/formatter/surah_favorite_formatter.dart';
 import 'package:quran_app/src/quran/model/surah_favorite.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -38,6 +37,7 @@ class SurahFavoriteRepositoryImpl implements SurahFavoriteRepository {
 
     return SurahFavoriteFormatter(null, surahFavorites);
   }
+
 
   @override
   Future<SurahFavoriteFormatter> addSurahFavorite(
